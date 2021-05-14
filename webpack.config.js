@@ -7,6 +7,9 @@ const config = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
+  devServer: {
+    contentBase: './dist',
+  },
   module: {
     rules: [
       {
@@ -20,9 +23,13 @@ const config = {
           'style-loader',
           'css-loader'
         ]
-      }
-    ]
-  }
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource'
+      },
+    ],
+  },
 };
 
 module.exports = config;
