@@ -10,6 +10,7 @@ const config = {
   devServer: {
     contentBase: './dist',
   },
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
