@@ -1,4 +1,4 @@
-class ToDoList {
+class TodoList {
   constructor() {
     this.projects = [];
   }
