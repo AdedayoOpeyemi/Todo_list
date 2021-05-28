@@ -7,12 +7,12 @@ const Content = document.querySelector('#content');
 
 document.addEventListener('onload', loadHeader());
 
-function Person(first, last, age, eye) {
-  this.firstName = first;
-  this.lastName = last;
-  this.age = age;
-  this.eyeColor = eye;
-}
+// function Person(first, last, age, eye) {
+//   this.firstName = first;
+//   this.lastName = last;
+//   this.age = age;
+//   this.eyeColor = eye;
+// }
 
 // const submission = document.querySelector("#add-task-button");
 
@@ -51,39 +51,39 @@ function Person(first, last, age, eye) {
 // }
 // }
 
-document.querySelector("#todo-form").addEventListener('submit', (e) => {
+// document.querySelector("#todo-form").addEventListener('submit', (e) => {
 
-  e.preventDefault();
+//   e.preventDefault();
 
-  //Get  values from form
-  var taskName = document.getElementById('taskName').value;
-  var dueDate = document.getElementById('dueDate').value;
-  var taskDescription = document.getElementById('description').value;
+//   //Get  values from form
+//   var taskName = document.getElementById('taskName').value;
+//   var dueDate = document.getElementById('dueDate').value;
+//   var taskDescription = document.getElementById('description').value;
   
   
-  //create an object to store the variables
-  var tasks = {
-    name:taskName,
-    description:taskDescription,
-    dueBy: dueDate
-  }
+//   //create an object to store the variables
+//   var tasks = {
+//     name:taskName,
+//     description:taskDescription,
+//     dueBy: dueDate
+//   }
 
-  console.log(tasks)
+//   console.log(tasks)
   
 
-  if(localStorage.getItem('task')==null){
-    var task =[]; 
-    task.push(tasks);
-    localStorage.setItem('task',JSON.stringify(task));
-    } else {
-    var myTask =  JSON.parse(localStorage.getItem('task')); 
-    myTask.push(tasks);
+//   if(localStorage.getItem('task')==null){
+//     var task =[]; 
+//     task.push(tasks);
+//     localStorage.setItem('task',JSON.stringify(task));
+//     } else {
+//     var myTask =  JSON.parse(localStorage.getItem('task')); 
+//     myTask.push(tasks);
 
-    // myTask.each((taskObj) => )
-    // then reset the localStorage
-    localStorage.setItem('task',JSON.stringify(myTask));
-};
-});
+//     // myTask.each((taskObj) => )
+//     // then reset the localStorage
+//     localStorage.setItem('task',JSON.stringify(myTask));
+// };
+// });
 
 
 // const cleanDOM = () => {

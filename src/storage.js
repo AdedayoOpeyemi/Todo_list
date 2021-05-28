@@ -7,7 +7,7 @@ class saveTodoList {
   }
 
   static getTodoList() {
-  
+    //extract the data from local storage and parse
     const todoList = Object.assign(
       new TodoList(),
       JSON.parse(localStorage.getItem('todolist')),
