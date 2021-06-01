@@ -17,18 +17,36 @@
         </nav>
       </header>
 
-      <div class="mainbody container-xxl vh-100">
-        <div class="row h-100">
+      <div class="mainbody container-xxl mh-100vh">
+        <div class="row mh-100vh">
 
-          <div class="project-section col-3 h-100">
-            <div class="timely-projects">
-              <div>Today</div>
-              <div>This Week</div>
-              <div>This month</div>
+          <div class="project-section col-3 mh-100">
+            <div class="timely-projects my-5">
+              <div class="">
+                <button class="">Today</button>
+              </div>
+              <div>
+                <button class="">Week</button> 
+              </div>
+              <div>
+                <button class="">This month</button>
+              </div>
 
             </div>
 
-            <div class="named-projects">
+            <div class="named-projects mb-5">
+              <h5 class="p-3">Projects</h5>
+
+              <div class="named-project-list">
+
+
+              </div>
+
+              <form id="project-form">
+                <label for="fname">Add New Project</label><br>
+                <input type="text" id="new_project" name="new_project" value="New Project"><br>
+                <input type="submit" value="Submit">
+              </form> 
 
             </div>
 
