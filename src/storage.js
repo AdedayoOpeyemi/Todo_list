@@ -1,21 +1,33 @@
 import TodoList from './todolist';
 import Task from './task';
+import Project from './projects';
 
-class saveTodoList {
+export default class Storage {
   static saveTodoList(todolist) {
     localStorage.setItem('todoList', JSON.stringify(todolist));
   }
 
   static getTodoList() {
-    //extract the data from local storage and parse
+    // local storage doesn't store type of data so we have to convert it
+
     const todoList = Object.assign(
       new TodoList(),
-      JSON.parse(localStorage.getItem('todolist')),
+      JSON.parse(localStorage.getItem('todoList')),
     );
 
-    //assign the project objects
+    todoList.setProjects(
+      todoList
+        .getProjects()
+        .map((project) => Object.assign(new Project(), project)),
+    );
 
-    //assign the task objects
+    todoList
+      .getProjects()
+      .forEach((project) =>
+        project.setTasks(
+          project.getTasks().map((task) => Object.assign(new Task(), task)),
+        ),
+      );
 
     return todoList;
   }

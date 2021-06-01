@@ -1,16 +1,16 @@
-class Project {
+export default class Project {
   constructor(name) {
     this.name = name;
     this.tasks = [];
   }
 
-  set name(newName) {
-    this.name = newName;
-  }
+  // set proJectname(name) {
+  //   this.name = name;
+  // }
 
-  get name() {
-    return this.name;
-  }
+  // get name() {
+  //   return this.name;
+  // }
 
   addTask(taskObj) {
     this.tasks.push(taskObj)
@@ -20,4 +20,17 @@ class Project {
     const indexOfTask = this.tasks.findIndex((task) => task.name == taskObj.name);
     this.tasks.splice(indexOfTask, 1);
   }
+
+  getTasks() {
+    return this.tasks;
+  }
+
+  setTasks(tasks) {
+    this.tasks = tasks;
+  }
+
+  getTask(taskName) {
+    return this.tasks.find((task) => task.getName() === taskName);
+  }
+
 }

@@ -1,11 +1,30 @@
 // import { Tooltip, Toast, Popover } from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "./styles.css";
-import loadHeader from './generalTemplate';
+import TodoList from './todolist';
+import Storage from './storage';
+import Project from './projects';
+import UI from './ui'
+// import loadHeader from './generalTemplate';
 
 const Content = document.querySelector('#content'); 
 
-document.addEventListener('onload', loadHeader());
+document.addEventListener('onload', UI.loadProjects());
+
+document.querySelector("#project-form").addEventListener('submit', (e) => {
+
+  e.preventDefault();
+const xyz = document.querySelector('#new_project').value;
+const abc = new Project(xyz);
+const todo = Storage.getTodoList();
+// Object.assign(todo, new TodoList);
+// todo.projects.map
+// Object.assign(todo.projects, abc);
+todo.addProject(abc);
+Storage.saveTodoList(todo);
+// UI.loadProjects();
+UI.createProject(abc.name);
+});
 
 // function Person(first, last, age, eye) {
 //   this.firstName = first;
@@ -102,6 +121,4 @@ document.addEventListener('onload', loadHeader());
 //   cleanDOM();
 //   loadHeader();
 // });
-
-
 

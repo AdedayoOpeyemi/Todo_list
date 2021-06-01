@@ -30,3 +30,33 @@ header {
 .project-section {
   background-color: #c6c5b9;
 }
+
+button {
+    /* background-color: #4CAF50; Green */
+    border: none;
+    /* color: #ACBEA3; */
+    background-color: inherit;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+button:hover {
+  background-color: #679289;
+  color: white;
+}
+
+.named-projects h5 {
+  font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    font-weight: 800;
+    background-color: #393d3f;
+    color: white;
+    border-radius: 10px;
+}
