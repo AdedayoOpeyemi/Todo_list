@@ -1,5 +1,6 @@
 // import { Tooltip, Toast, Popover } from 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
 import "./styles.css";
 import TodoList from './todolist';
 import Storage from './storage';

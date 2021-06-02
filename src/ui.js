@@ -22,13 +22,24 @@ export default class UI {
   static createProject(name) {
     const projectListDiv = document.querySelector('.named-project-list');
     projectListDiv.innerHTML += `
-      <div>
-        <button class="">${name}</button>
+      <div class='d-flex align-items-center'>
+         
+        <button class="d-flex justify-content-between w-100"> 
+        <div>
+        <i class="far fa-calendar-minus me-3"></i><span> ${name}</span>
+        </div>
+        <div>
+        <i class="far fa-trash-alt "></i>
+        </div>
+        
+        </button>
+        
       </div>
     `
   }
 
-  static addProjectToUI(name) {
-    
+  statloadTask(project) {
+
+
   }
 }

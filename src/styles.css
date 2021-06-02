@@ -41,9 +41,9 @@ button {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    width: 100%;
+    /* width: 100%; */
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.5em;
+    font-size: 1em;
     font-weight: 600;
 }
 
@@ -59,4 +59,9 @@ button:hover {
     background-color: #393d3f;
     color: white;
     border-radius: 10px;
+}
+
+input:focus::-webkit-input-placeholder {
+  transition: opacity 0.5s 0.5s ease!important;
+  opacity: 0.35;
 }

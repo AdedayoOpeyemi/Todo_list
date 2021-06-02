@@ -6,6 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <meta charset="utf-8">
     </head>
     <body>
@@ -17,10 +18,10 @@
         </nav>
       </header>
 
-      <div class="mainbody container-xxl mh-100vh">
-        <div class="row mh-100vh">
+      <div class="mainbody container-xxl min-vh-100">
+        <div class="row min-vh-100">
 
-          <div class="project-section col-3 mh-100">
+          <div class="project-section col-3">
             <div class="timely-projects my-5">
               <div class="">
                 <button class="">Today</button>
@@ -44,7 +45,7 @@
 
               <form id="project-form">
                 <label for="fname">Add New Project</label><br>
-                <input type="text" id="new_project" name="new_project" value="New Project"><br>
+                <input type="text" id="new_project" name="new_project" placeholder="New Project"><br>
                 <input type="submit" value="Submit">
               </form> 
 
@@ -53,6 +54,43 @@
           </div>
   
           <div class="tasks-section col-7 h-100">
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="book-form">
+                    <div class="form-group">
+                      <label for="title">Title</label>
+                      <input type="text" id="title" class="form-control">
+                    </div><br>
+                    <div class="form-group">
+                      <label for="author">Author</label>
+                      <input type="text" id="author" class="form-control">
+                    </div><br>
+                    <div class="form-group">
+                      <label for="page">Number of Pages</label>
+                      <input type="text" id="page" class="form-control">
+                    </div><br>
+                    <div class="d-grid gap-2">
+                    <input type="submit" value="Add Book" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  </div>
+                  </form><br>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Add New Book
+            </button>
   
   
           </div>
