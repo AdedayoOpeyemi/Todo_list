@@ -11,6 +11,8 @@ import Task from './task'
 
 const Content = document.querySelector('#content'); 
 
+document.querySelector('#add-task').addEventListener('click', UI.setMinDate());
+
 document.addEventListener('onload', UI.loadProjects());
 
 document.querySelector("#project-form").addEventListener('submit', (e) => {
