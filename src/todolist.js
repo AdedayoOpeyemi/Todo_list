@@ -1,3 +1,5 @@
+import Project from './projects';
+
 export default class TodoList {
   constructor() {
     this.projects = [];
@@ -15,4 +17,10 @@ export default class TodoList {
   getProjects() {
     return this.projects;
   }
+
+  getProject(projectName) {
+    return this.projects.find((project) => project.getName() === projectName);
+  }
+
+
 }

@@ -4,13 +4,17 @@ export default class Project {
     this.tasks = [];
   }
 
-  // set proJectname(name) {
+  // set projectname(name) {
   //   this.name = name;
   // }
 
   // get name() {
   //   return this.name;
   // }
+
+  getName() {
+    return this.name;
+  }
 
   addTask(taskObj) {
     this.tasks.push(taskObj)

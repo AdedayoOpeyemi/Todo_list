@@ -5,7 +5,8 @@ import "./styles.css";
 import TodoList from './todolist';
 import Storage from './storage';
 import Project from './projects';
-import UI from './ui'
+import UI from './ui';
+import Task from './task'
 // import loadHeader from './generalTemplate';
 
 const Content = document.querySelector('#content'); 
@@ -25,7 +26,44 @@ todo.addProject(abc);
 Storage.saveTodoList(todo);
 // UI.loadProjects();
 UI.createProject(abc.name);
+UI.clearProjectForm();
 });
+
+document.querySelector('.named-project-list').addEventListener('click', (e) => {
+  // console.log(e.target.innerText);
+  
+  UI.loadTask(e.target.innerText);
+  // document.addEventListener('DOMContentLoaded', UI.displayBooks);
+
+});
+
+document.querySelector("#task-form").addEventListener('submit', (e) => {
+
+  e.preventDefault();
+
+  //get the current project
+  const currentProject = document.querySelector(".active-project-title h5").innerText;
+
+  //Get  values from form
+  const title = document.querySelector('#title').value;
+  const description = document.querySelector('#task-description').value;
+  const duedate = document.querySelector('#duedate').value;
+  console.log(currentProject)
+  //Create instance of book
+  const newTask= new Task(title, description, duedate);
+  Storage.addTask(currentProject, newTask)
+  console.log
+  UI.loadTask(currentProject);
+
+// const todoList = Storage.getTodoList().getProject(currentProject);
+//  console.log(todoList);
+  // console.log(newBook)
+
+  //Add new instance of Book to List
+  // UI.addBookToList(newBook);alright,
+});
+
+// document.querySelectorAll(e)
 
 // function Person(first, last, age, eye) {
 //   this.firstName = first;
