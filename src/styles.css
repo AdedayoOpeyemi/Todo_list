@@ -23,7 +23,7 @@ header {
   background-color:#fdfdff;
 }
 
-.pgae-content {
+.page-content {
   height: 100%;
 }
 
@@ -31,7 +31,7 @@ header {
   background-color: #c6c5b9;
 }
 
-button {
+.project-button, .timed-project {
     /* background-color: #4CAF50; Green */
     border: none;
     /* color: #ACBEA3; */
@@ -47,10 +47,16 @@ button {
     font-weight: 600;
 }
 
-button:hover {
+button {
+  border: none;
+  background-color: inherit;
+  text-decoration: none;
+}
+
+/* button:hover {
   background-color: #679289;
   color: white;
-}
+} */
 
 .named-projects h5 {
   font-family: 'Montserrat', sans-serif;
@@ -66,20 +72,31 @@ input:focus::-webkit-input-placeholder {
   opacity: 0.35;
 }
 
-.collapsible {
-  background-color: #777;
-  color: white;
+.expand {
   cursor: pointer;
+}
+
+.collapsible {
+  background-color: #BFC3C5;
+  color: white;
+  
+  cursor: context-menu;
   padding: 18px;
   width: 100%;
   border: none;
   text-align: left;
   outline: none;
   font-size: 15px;
+  background-color: #BCBABE;
+  color: white;
 }
 
 .active, .collapsible:hover {
   background-color: #555;
+}
+
+.collapsible:hover > .fas {
+  color: white;
 }
 
 .content {
@@ -87,4 +104,9 @@ input:focus::-webkit-input-placeholder {
   display: none;
   overflow: hidden;
   background-color: #f1f1f1;
+}
+
+.active-project {
+  background-color: #BFC3C5
+
 }

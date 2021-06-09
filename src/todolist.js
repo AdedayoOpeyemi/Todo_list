@@ -6,7 +6,11 @@ export default class TodoList {
   }
 
   addProject(newProject) {
-    if (this.projects.indexOf(newProject) > 0) return;
+    console.log(this.projects.indexOf(newProject))
+    if (this.projects.indexOf(newProject) < 0) 
+    {  alert('Use a new project name')
+
+    };
     this.projects.push(newProject);
   }
 

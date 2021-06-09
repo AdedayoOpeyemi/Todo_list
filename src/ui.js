@@ -67,7 +67,7 @@ export default class UI {
     projectListDiv.innerHTML += `
       <div class='d-flex align-items-center'>
          
-        <button class="d-flex justify-content-between w-100"> 
+        <button class="d-flex justify-content-between w-100 project-button"> 
         <div>
         <i class="fas fa-landmark me-3"></i><span>${name}</span>
         </div>
@@ -90,10 +90,6 @@ export default class UI {
     // console.log(Storage.getTodoList() instanceof TodoList);
     console.log(todoList.getProjects());
     const allProjects = todoList.getProjects();
-    // todoList.getProjects
-    // console.log(todoList.getProject(String(projectName)));
-    // console.log(typeof projectName === 'string');
-    // console.log(todoList[0])
     const activeProject = todoList.getProject(projectName);
     // console.log(activeProject[n])
     // const activeProjectTitle = document.querySelector('.active-project-tasks');
@@ -103,7 +99,7 @@ export default class UI {
     .getProject(projectName)
     .getTasks().forEach((task) => {
       {
-        UI.createTask(task);
+        UI.addTask(task);
       }
     });
     UI.collapsible();
@@ -115,23 +111,29 @@ export default class UI {
 
 
   static createTask(task) {
-    const taskList = document.querySelector('.active-project-tasks');
-    taskList.innerHTML += `
+    return `
     <div class='d-flex flex-column task-body mb-3' >
       <div class='d-flex align-items-center collapsible'>
         
-        <button class="d-flex justify-content-between w-100" type="button" > 
+        <div class="d-flex justify-content-between w-100"  > 
         
-          <div>
-          <input class="me-3" type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-            <i class="fas fa-landmark me-3"></i><span>${task.name}</span>
-            <span>${task.dueDate}</span>
+          <div class="d-flex flex-row flex-grow-1">
+          
+            <div class="expand">
+              <i class="fas fa-landmark me-3"></i><span>${task.name}</span>
+            </div>
+            
+            
           </div>
           <div>
-            <i class="far fa-trash-alt "></i>
+            <span class="ms-3">priority: ${task.priority}</span>
+            <i class="fas fa-edit ms-3"></i>
+            <i class="far fa-trash-alt ms-3"></i>
+            <span class="ms-3">${task.dueDate}</span>
+            <input class="ms-5" type="checkbox" id="completed" name="complted" value="completed">
           </div>
       
-        </button>
+        </div>
       </div>
       <div class="content">
         <div class="card card-body">
@@ -140,16 +142,20 @@ export default class UI {
       </div>
     </div>
   `
+
+
+
+
   }
 
   static collapsible() {
-    var coll = document.getElementsByClassName("collapsible");
+    var coll = document.getElementsByClassName("expand");
     var i;
 
     for (i = 0; i < coll.length; i++) {
       coll[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
+        this.parentElement.parentElement.parentElement.classList.toggle("active");
+        var content = this.parentElement.parentElement.parentElement.nextElementSibling;
         if (content.style.display === "block") {
           content.style.display = "none";
         } else {
@@ -162,10 +168,17 @@ export default class UI {
   static editTask() {
 
   }
+  
+  static timelyList() {
 
-  // addTask()
+  }
+
+
+  static addTask(task) {
+    const taskList = document.querySelector('.active-project-tasks');
+    taskList.innerHTML += UI.createTask(task)
+  }
 }
 
-//   static changeStatus(e) {
-//     const projectName = e.target.textContent
-// }
+
+    

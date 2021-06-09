@@ -6,8 +6,11 @@ import TodoList from './todolist';
 import Storage from './storage';
 import Project from './projects';
 import UI from './ui';
-import Task from './task'
+import Task from './task';
+import isToday from 'date-fns/isToday';
+import parseISO from 'date-fns/parseISO';
 // import loadHeader from './generalTemplate';
+
 
 const Content = document.querySelector('#content'); 
 
@@ -17,7 +20,7 @@ document.addEventListener('onload', UI.loadProjects());
 
 document.querySelector("#project-form").addEventListener('submit', (e) => {
 
-  e.preventDefault();
+e.preventDefault();
 const xyz = document.querySelector('#new_project').value;
 const abc = new Project(xyz);
 const todo = Storage.getTodoList();
@@ -29,6 +32,7 @@ Storage.saveTodoList(todo);
 // UI.loadProjects();
 UI.createProject(abc.name);
 UI.clearProjectForm();
+
 });
 
 document.querySelector('.named-project-list').addEventListener('click', (e) => {
@@ -42,7 +46,7 @@ document.querySelector('.named-project-list').addEventListener('click', (e) => {
 document.querySelector("#task-form").addEventListener('submit', (e) => {
 
   e.preventDefault();
-
+ 
   //get the current project
   const currentProject = document.querySelector(".active-project-title h5").innerText;
 
@@ -50,13 +54,16 @@ document.querySelector("#task-form").addEventListener('submit', (e) => {
   const title = document.querySelector('#title').value;
   const description = document.querySelector('#task-description').value;
   const duedate = document.querySelector('#duedate').value;
-  console.log(currentProject)
+  const priority = document.querySelector('#task-priority').value;
+  console.log(priority)
+  // console.log(currentProject)
   //Create instance of book
-  const newTask= new Task(title, description, duedate);
+  const newTask= new Task(title, description, duedate, priority);
   Storage.addTask(currentProject, newTask)
   console.log
   UI.loadTask(currentProject);
-
+  console.log(isToday(parseISO(duedate)));
+;
 // const todoList = Storage.getTodoList().getProject(currentProject);
 //  console.log(todoList);
   // console.log(newBook)
