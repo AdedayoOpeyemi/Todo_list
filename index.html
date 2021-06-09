@@ -24,7 +24,7 @@
           <div class="project-section col-3">
             <div class="timely-projects my-5">
               <div class="">
-                <button class="d-flex w-100">
+                <button class="d-flex w-100 timed-project this-day">
                   <div>
                     <i class="fas fa-calendar-day me-3"></i>
                   </div>
@@ -34,7 +34,7 @@
                 </button>
               </div>
               <div>
-                <button class="d-flex w-100">
+                <button class="d-flex w-100 timed-project this-week">
                   <div>
                     <i class="fas fa-calendar-week me-3"></i>
                   </div>
@@ -44,7 +44,7 @@
                 </button> 
               </div>
               <div>
-                <button class="d-flex w-100">
+                <button class="d-flex w-100 timed-project this-month">
                   <div>
                     <i class="far fa-calendar-alt me-3"></i>
                   </div>
@@ -67,7 +67,7 @@
               <form id="project-form">
                 <label for="fname">Add New Project</label><br>
                 <input type="text" id="new_project" name="new_project" placeholder="New Project" required><br>
-                <input type="submit" value="Submit">
+                <input type="submit" value="Add Project">
               </form> 
 
             </div>
@@ -96,10 +96,22 @@
                       <label for="description">Description</label>
                       <textarea type="text" id="task-description" class="form-control" rows="8" cols="100"></textarea>
                     </div><br>
+                 
+                    <div class="form-group">
+                      <label for="priority">Priority</label>
+                      <select id="task-priority" class="form-control">
+                        <option value="low">Low</option>
+                        <option value="normal">Normal</option>
+                        <option value="high">High</option>
+                        <select>
+                    </div><br>
                     <div class="form-group">
                       <label for="duedate">Due date</label>
                       <input type="date" id="duedate" class="form-control" min="today" required>
                     </div><br>
+
+      
+                  
                     <div class="d-grid gap-2">
                     <input type="submit" value="Add Book" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                   </div>
