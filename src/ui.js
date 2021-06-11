@@ -15,7 +15,7 @@ export default class UI {
     document.querySelector('#new_project').value = '';
  }
   static clearProjectList() {
-    
+    document.querySelector(".named-project").innerHTML = "";
   }
 
   static clearTaskList() {
@@ -43,7 +43,8 @@ export default class UI {
           UI.createProject(project.name);
         }
       });
-
+    
+    UI.deleteProject();
     // UI.initAddProjectButtons();
   }
 
@@ -63,16 +64,16 @@ export default class UI {
   }
 
   static createProject(name) {
-    const projectListDiv = document.querySelector('.named-project-list');
+    const projectListDiv = document.querySelector('.named-project');
     projectListDiv.innerHTML += `
       <div class='d-flex align-items-center'>
          
         <button class="d-flex justify-content-between w-100 project-button"> 
-        <div>
+        <div class="named-project-list">
         <i class="fas fa-landmark me-3"></i><span>${name}</span>
         </div>
-        <div>
-        <i class="far fa-trash-alt "></i>
+        <div class="">
+        <i class="far fa-trash-alt delete-project"></i>
         </div>
         
         </button>
@@ -117,20 +118,20 @@ export default class UI {
         
         <div class="d-flex justify-content-between w-100"  > 
         
-          <div class="d-flex flex-row flex-grow-1">
+          <div class="expand d-flex flex-row flex-grow-1">
           
-            <div class="expand">
+            <div class="">
               <i class="fas fa-landmark me-3"></i><span>${task.name}</span>
             </div>
             
             
           </div>
           <div>
-            <span class="ms-3">priority: ${task.priority}</span>
+            <span class="m-3">priority: ${task.priority}</span>
             <i class="fas fa-edit ms-3"></i>
             <i class="far fa-trash-alt ms-3"></i>
             <span class="ms-3">${task.dueDate}</span>
-            <input class="ms-5" type="checkbox" id="completed" name="complted" value="completed">
+            <input class="ms-5 completed" type="checkbox" id="completed" name="completed" value="completed">
           </div>
       
         </div>
@@ -149,13 +150,12 @@ export default class UI {
   }
 
   static collapsible() {
-    var coll = document.getElementsByClassName("expand");
-    var i;
+    const coll = document.getElementsByClassName("expand");
 
-    for (i = 0; i < coll.length; i++) {
+    for (var i = 0; i < coll.length; i++) {
       coll[i].addEventListener("click", function() {
-        this.parentElement.parentElement.parentElement.classList.toggle("active");
-        var content = this.parentElement.parentElement.parentElement.nextElementSibling;
+        this.parentElement.parentElement.classList.toggle("active");
+        var content = this.parentElement.parentElement.nextElementSibling;
         if (content.style.display === "block") {
           content.style.display = "none";
         } else {
@@ -173,10 +173,29 @@ export default class UI {
 
   }
 
+  static removeProject(project) {
+
+  }
+
 
   static addTask(task) {
     const taskList = document.querySelector('.active-project-tasks');
     taskList.innerHTML += UI.createTask(task)
+  }
+
+  static deleteProject() {
+    const deleteIcon = document.getElementsByClassName('delete-project');
+    
+
+    for (var i=0; i < deleteIcon.length; i++) {
+      deleteIcon[i].addEventListener("click", function() {
+        var projectToDelete = this.parentElement.previousElementSibling.children[1].innerText;
+        console.log(projectToDelete)
+        Storage.deleteProject(projectToDelete);
+        UI.clearProjectList();
+        UI.loadProjects();
+      })
+    }
   }
 }
 

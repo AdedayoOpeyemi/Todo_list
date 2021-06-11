@@ -30,17 +30,17 @@ const todo = Storage.getTodoList();
 todo.addProject(abc);
 Storage.saveTodoList(todo);
 // UI.loadProjects();
-UI.createProject(abc.name);
+// UI.createProject(abc.name);
+UI.clearProjectList();
+UI.loadProjects();
 UI.clearProjectForm();
 
 });
 
-document.querySelector('.named-project-list').addEventListener('click', (e) => {
-  // console.log(e.target.innerText);
-  
-  UI.loadTask(e.target.innerText);
-  // document.addEventListener('DOMContentLoaded', UI.displayBooks);
-
+document.querySelectorAll('.named-project-list').forEach(project => {
+  project.addEventListener('click', (e) => {
+    UI.loadTask(e.target.innerText);
+  })
 });
 
 document.querySelector("#task-form").addEventListener('submit', (e) => {
@@ -170,3 +170,4 @@ document.querySelector("#task-form").addEventListener('submit', (e) => {
 //   loadHeader();
 // });
 
+document.getElementsByClassName('delete-project') 

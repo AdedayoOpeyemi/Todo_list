@@ -8,10 +8,15 @@ export default class TodoList {
   addProject(newProject) {
     console.log(this.projects.indexOf(newProject))
     if (this.projects.indexOf(newProject) < 0) 
-    {  alert('Use a new project name')
-
+    {  this.projects.push(newProject);
+      return
     };
-    this.projects.push(newProject);
+    
+  }
+
+  deleteProject(projectName) {
+    const indexOfProject = this.projects.findIndex((project) => project.name == projectName);
+    this.projects.splice(indexOfProject, 1);
   }
 
   setProjects(projects) {

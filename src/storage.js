@@ -37,5 +37,11 @@ export default class Storage {
     todoList.getProject(project).addTask(task);
     Storage.saveTodoList(todoList);
   }
+
+  static deleteProject(projectName) {
+    const todoList = Storage.getTodoList();
+    todoList.deleteProject(projectName);
+    Storage.saveTodoList(todoList)
+  }
 }
 
