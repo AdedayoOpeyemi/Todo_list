@@ -53,10 +53,10 @@ button {
   text-decoration: none;
 }
 
-/* button:hover {
+button:hover {
   background-color: #679289;
   color: white;
-} */
+}
 
 .named-projects h5 {
   font-family: 'Montserrat', sans-serif;

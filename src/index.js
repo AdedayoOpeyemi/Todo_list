@@ -27,13 +27,20 @@ const todo = Storage.getTodoList();
 // Object.assign(todo, new TodoList);
 // todo.projects.map
 // Object.assign(todo.projects, abc);
+
+// if (Storage.getTodoList().contains(abc)) {
+//   addProjectPopupInput.value = '';
+//   alert('Project names must be different');
+//   return;
+// }
 todo.addProject(abc);
 Storage.saveTodoList(todo);
+
 // UI.loadProjects();
 // UI.createProject(abc.name);
 UI.clearProjectList();
 UI.loadProjects();
-UI.clearProjectForm();
+// UI.clearProjectForm();
 
 });
 
@@ -46,7 +53,8 @@ document.querySelectorAll('.named-project-list').forEach(project => {
 document.querySelector("#task-form").addEventListener('submit', (e) => {
 
   e.preventDefault();
- 
+  const previoustitle = document.querySelector('#title').placeholder;
+  console.log(previoustitle);
   //get the current project
   const currentProject = document.querySelector(".active-project-title h5").innerText;
 

@@ -7,6 +7,14 @@ export default class Task {
     this.completed = false;
   }
 
+  setName(name) {
+    this.name = name;
+  }
+
+  getName() {
+    return this.name;
+  }
+
   // set name(newName) {
   //   this.name = newName;
   // }

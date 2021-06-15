@@ -75,7 +75,7 @@
           </div>
   
           <div class="tasks-section col-7 h-100">
-            <button type="button" id="add-task" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" id="add-task" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
               Add New Task
             </button>
 
@@ -90,16 +90,16 @@
                     <form id="task-form">
                     <div class="form-group">
                       <label for="title">Title</label>
-                      <input type="text" id="title" class="form-control" required>
+                      <input type="text" id="title" class="form-control" placeholder="Add new task" required>
                     </div><br>
                     <div class="form-group">
                       <label for="description">Description</label>
-                      <textarea type="text" id="task-description" class="form-control" rows="8" cols="100"></textarea>
+                      <textarea type="text" id="task-description" class="form-control" rows="8" cols="100" required></textarea>
                     </div><br>
                  
                     <div class="form-group">
                       <label for="priority">Priority</label>
-                      <select id="task-priority" class="form-control">
+                      <select id="task-priority" class="form-control" required>
                         <option value="low">Low</option>
                         <option value="normal">Normal</option>
                         <option value="high">High</option>
@@ -113,7 +113,7 @@
       
                   
                     <div class="d-grid gap-2">
-                    <input type="submit" value="Add Book" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <input type="submit" value="Add Task" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
                   </div>
                   </form><br>
                   </div>
@@ -164,5 +164,6 @@
 
         
         <script src="bundle.js"></script>
+        
     </body>
 </html>

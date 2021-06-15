@@ -20,10 +20,7 @@ export default class UI {
 
   static clearTaskList() {
     document.querySelector(".active-project-title").innerHTML = "";
-    
-
     document.querySelector(".active-project-tasks").innerHTML = "";
-    
   }
 
   static loadHomepage() {
@@ -43,9 +40,17 @@ export default class UI {
           UI.createProject(project.name);
         }
       });
-    
+    UI.projectTasks();
     UI.deleteProject();
     // UI.initAddProjectButtons();
+  }
+
+  static projectTasks() {
+    document.querySelectorAll('.named-project-list').forEach(project => {
+      project.addEventListener('click', (e) => {
+        UI.loadTask(e.target.innerText);
+      })
+    });
   }
 
   static setMinDate() {
@@ -105,8 +110,8 @@ export default class UI {
     });
     UI.collapsible();
     UI.clearTaskForm();
-    
-    
+    UI.deleteTask();
+  
   }
 
 
@@ -128,8 +133,8 @@ export default class UI {
           </div>
           <div>
             <span class="m-3">priority: ${task.priority}</span>
-            <i class="fas fa-edit ms-3"></i>
-            <i class="far fa-trash-alt ms-3"></i>
+            <i class="fas fa-edit edit-task ms-3"></i>
+            <i class="far fa-trash-alt ms-3 delete-task"></i>
             <span class="ms-3">${task.dueDate}</span>
             <input class="ms-5 completed" type="checkbox" id="completed" name="completed" value="completed">
           </div>
@@ -165,11 +170,58 @@ export default class UI {
     }
   }
 
-  static editTask() {
+  static editTask() { 
+    const editTaskIcon =  document.querySelectorAll('.edit-task')
 
+    for (var i=0; i < editTaskIcon.length; i++) {
+      editTaskIcon[i].addEventListener("click", function() {
+        var taskToEdit = this.parentElement.previousElementSibling.children[0].children[1].innerText;
+        console.log(taskToEdit)
+        // Storage.deleteProject(projectToDelete);
+        // UI.clearProjectList();
+        // UI.loadProjects();
+      })
+    }
   }
-  
-  static timelyList() {
+
+
+  static deleteTask() { 
+    const deleteTaskIcon =  document.querySelectorAll('.delete-task')
+
+    for (var i=0; i < deleteTaskIcon.length; i++) {
+      deleteTaskIcon[i].addEventListener("click", function() {
+        var taskToDelete = this.parentElement.previousElementSibling.children[0].children[1].innerText;
+        console.log(taskToDelete)
+
+        const projectOfTask = document.querySelector('.active-project-title h5').innerText
+        console.log(projectOfTask)
+        Storage.deleteTask(projectOfTask, taskToDelete);
+    this.closest(".task-body").remove()
+        // Storage.deleteProject(projectToDelete);
+        // UI.clearProjectList();
+        // UI.loadProjects();
+      })
+    }
+  }
+
+
+  static completeTask() {
+    const deleteTaskIcon =  document.querySelectorAll('.delete-task')
+
+    for (var i=0; i < deleteTaskIcon.length; i++) {
+      editTaskIcon[i].addEventListener("click", function() {
+        var taskToEdit = this.parentElement.previousElementSibling.children[0].children[1].innerText;
+        console.log(taskToDelete)
+
+        const projectOfTask = projectTitle = document.querySelector('.active-project-title')
+
+        // Storage.deleteProject(projectToDelete);
+        // UI.clearProjectList();
+        // UI.loadProjects();
+      })
+    }
+  }  
+  static loadTimelyList() {
 
   }
 
@@ -184,19 +236,30 @@ export default class UI {
   }
 
   static deleteProject() {
-    const deleteIcon = document.getElementsByClassName('delete-project');
+    const deleteIcon = document.getElementsByClassName('delete-project')
     
 
     for (var i=0; i < deleteIcon.length; i++) {
       deleteIcon[i].addEventListener("click", function() {
         var projectToDelete = this.parentElement.previousElementSibling.children[1].innerText;
+        const projectTasks = document.querySelector('.active-project-title');
         console.log(projectToDelete)
         Storage.deleteProject(projectToDelete);
+        if (projectTasks == projectToDelete) {
+          UI.clearTaskList();
+        }
+        UI.clearTaskList();
         UI.clearProjectList();
         UI.loadProjects();
       })
     }
   }
+  
+  static removeTask() {
+
+  }
+
+
 }
 
 

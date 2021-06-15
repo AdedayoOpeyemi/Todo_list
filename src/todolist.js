@@ -31,5 +31,9 @@ export default class TodoList {
     return this.projects.find((project) => project.getName() === projectName);
   }
 
+  alreadyExists(projectName) {
+    return this.projects.some((project) => project.getName() === projectName);
+  }
+
 
 }
