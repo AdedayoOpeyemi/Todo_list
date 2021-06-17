@@ -1,6 +1,9 @@
 import Project from './projects';
 import Storage from './storage';
 import TodoList from './todolist';
+import { Modal } from 'bootstrap';
+// import 'bootstrap';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class UI {
 
@@ -111,6 +114,7 @@ export default class UI {
     UI.collapsible();
     UI.clearTaskForm();
     UI.deleteTask();
+    UI.editTask();
   
   }
 
@@ -177,9 +181,21 @@ export default class UI {
       editTaskIcon[i].addEventListener("click", function() {
         var taskToEdit = this.parentElement.previousElementSibling.children[0].children[1].innerText;
         console.log(taskToEdit)
-        // Storage.deleteProject(projectToDelete);
-        // UI.clearProjectList();
-        // UI.loadProjects();
+
+        var taskEditForm = new Modal(document.getElementById('exampleModal'), {
+          keyboard: false
+        })
+        const projectOfTask = document.querySelector('.active-project-title h5').innerText
+      const task = Storage.getTask(projectOfTask, taskToEdit)
+      
+      document.querySelector('#title').placeholder = task.name;
+      document.querySelector('#title').value = task.name;
+      document.querySelector('#task-description').value = task.description;
+      document.querySelector('#duedate').value = task.dueDate;
+      document.querySelector('#task-priority').value = task.priority;
+       
+        taskEditForm.show();
+        
       })
     }
   }
@@ -196,7 +212,7 @@ export default class UI {
         const projectOfTask = document.querySelector('.active-project-title h5').innerText
         console.log(projectOfTask)
         Storage.deleteTask(projectOfTask, taskToDelete);
-    this.closest(".task-body").remove()
+        this.closest(".task-body").remove()
         // Storage.deleteProject(projectToDelete);
         // UI.clearProjectList();
         // UI.loadProjects();

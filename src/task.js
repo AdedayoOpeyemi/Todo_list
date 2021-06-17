@@ -15,6 +15,18 @@ export default class Task {
     return this.name;
   }
 
+  setDescription(description) {
+    this.description = description;
+  }
+
+  updateTask(name, description, duedate, priority, completed) {
+    this.description = description;
+    this.dueDate = duedate;
+    this.priority = priority;
+    this.completed = completed;
+    this.name = name;
+  }
+
   // set name(newName) {
   //   this.name = newName;
   // }

@@ -53,8 +53,8 @@ document.querySelectorAll('.named-project-list').forEach(project => {
 document.querySelector("#task-form").addEventListener('submit', (e) => {
 
   e.preventDefault();
-  const previoustitle = document.querySelector('#title').placeholder;
-  console.log(previoustitle);
+  const previousTitle = document.querySelector('#title').placeholder;
+  console.log(previousTitle);
   //get the current project
   const currentProject = document.querySelector(".active-project-title h5").innerText;
 
@@ -64,13 +64,20 @@ document.querySelector("#task-form").addEventListener('submit', (e) => {
   const duedate = document.querySelector('#duedate').value;
   const priority = document.querySelector('#task-priority').value;
   console.log(priority)
-  // console.log(currentProject)
-  //Create instance of book
-  const newTask= new Task(title, description, duedate, priority);
+
+  if (previousTitle == "Add new task") {
+    const newTask= new Task(title, description, duedate, priority);
   Storage.addTask(currentProject, newTask)
   console.log
   UI.loadTask(currentProject);
   console.log(isToday(parseISO(duedate)));
+  }
+
+  Storage.updateTask(currentProject, previousTitle, title, description, duedate, priority);
+  UI.loadTask(currentProject);
+  // console.log(currentProject)
+  //Create instance of book
+  
 ;
 // const todoList = Storage.getTodoList().getProject(currentProject);
 //  console.log(todoList);
