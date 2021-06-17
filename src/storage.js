@@ -52,15 +52,19 @@ export default class Storage {
 
   static getTask(project, task) {
     const todoList = Storage.getTodoList();
-    const oldTask = todoList.getProject(project).getTask(task);
-    return oldTask;
+    return todoList.getProject(project).getTask(task);
   }
 
   static updateTask(project, task, newTitle, newDescription, newDueDate,  newPriority) {
     const todoList = Storage.getTodoList();
-    console.log(project)
     todoList.getProject(project).getTask(task).updateTask(newTitle, newDescription, newDueDate, newPriority);
     Storage.saveTodoList(todoList)
+  }
+
+  static changeTaskCompletion(project, task, status) {
+    const todoList = Storage.getTodoList();
+    todoList.getProject(project).getTask(task).toggleCompletion(status)
+    Storage.saveTodoList(todoList);
   }
 
 }

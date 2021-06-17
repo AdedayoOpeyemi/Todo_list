@@ -27,6 +27,12 @@ export default class Task {
     this.name = name;
   }
 
+  completedTask() {
+    if (this.completed == true) {
+      return "checked"
+    }
+  }
+
   // set name(newName) {
   //   this.name = newName;
   // }
@@ -51,8 +57,10 @@ export default class Task {
   //   return this.dueDate;
   // }
 
-  toggleCompletion(task) {
-    task.completed = !task.completed;
+  toggleCompletion(newStatus) {
+    this.completed = newStatus;
   }
+
+
 
 }

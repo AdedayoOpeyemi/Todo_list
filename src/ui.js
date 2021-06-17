@@ -1,5 +1,6 @@
 import Project from './projects';
 import Storage from './storage';
+import Task from './task';
 import TodoList from './todolist';
 import { Modal } from 'bootstrap';
 // import 'bootstrap';
@@ -115,6 +116,7 @@ export default class UI {
     UI.clearTaskForm();
     UI.deleteTask();
     UI.editTask();
+    UI.completeTask();
   
   }
 
@@ -140,7 +142,7 @@ export default class UI {
             <i class="fas fa-edit edit-task ms-3"></i>
             <i class="far fa-trash-alt ms-3 delete-task"></i>
             <span class="ms-3">${task.dueDate}</span>
-            <input class="ms-5 completed" type="checkbox" id="completed" name="completed" value="completed">
+            <input class="ms-5 completed" type="checkbox" id="completed" name="completed" value="completed" ${task.completedTask()}>
           </div>
       
         </div>
@@ -222,14 +224,18 @@ export default class UI {
 
 
   static completeTask() {
-    const deleteTaskIcon =  document.querySelectorAll('.delete-task')
+    const taskCheckbox =  document.querySelectorAll('.completed')
 
-    for (var i=0; i < deleteTaskIcon.length; i++) {
-      editTaskIcon[i].addEventListener("click", function() {
-        var taskToEdit = this.parentElement.previousElementSibling.children[0].children[1].innerText;
-        console.log(taskToDelete)
+    for (var i=0; i < taskCheckbox.length; i++) {
+      taskCheckbox[i].addEventListener("change", function() {
+        var taskToEditCompletion = this.parentElement.previousElementSibling.children[0].children[1].innerText;
+        console.log(taskToEditCompletion)
+        console.log(this.checked);
 
-        const projectOfTask = projectTitle = document.querySelector('.active-project-title')
+        const projectOfTask = document.querySelector('.active-project-title h5').innerText
+        Storage.changeTaskCompletion(projectOfTask, taskToEditCompletion, this.checked)
+        UI.loadTask(projectOfTask)
+
 
         // Storage.deleteProject(projectToDelete);
         // UI.clearProjectList();
