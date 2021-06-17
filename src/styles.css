@@ -76,19 +76,47 @@ input:focus::-webkit-input-placeholder {
   cursor: pointer;
 }
 
-.collapsible {
-  background-color: #555;
-  color: white;
-  
+input[type='checkbox'] {
+  width: 25px;
+  height: 25px
+}
+
+input[type='checkbox']:checked {
+  color: grey;
+}
+
+.task-defaults {
   cursor: context-menu;
-  padding: 18px;
+  padding: 12px;
   width: 100%;
   border: none;
   text-align: left;
   outline: none;
   font-size: 15px;
+}
+
+.collapsible {
+  background-color: #555;
+  color: white;
   /* background-color: #BCBABE; */
   color: white;
+  /* cursor: context-menu;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px; */
+}
+
+.checked {
+  text-decoration: line-through;
+  background-color: yellow;
+  color: black;
+}
+
+.checked:hover {
+  background-color: yellow;
 }
 
 .active, .collapsible:hover {

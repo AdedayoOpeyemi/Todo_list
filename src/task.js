@@ -60,7 +60,4 @@ export default class Task {
   toggleCompletion(newStatus) {
     this.completed = newStatus;
   }
-
-
-
 }

@@ -120,24 +120,31 @@ export default class UI {
   
   }
 
+  static checked(value) {
+    if (value.completed == true) {
+      return "checked";
+    }
+    return "collapsible"
+  }
+
 
 
   static createTask(task) {
     return `
-    <div class='d-flex flex-column task-body mb-3' >
-      <div class='d-flex align-items-center collapsible'>
+    <div class='d-flex flex-column task-body mb-3'>
+      <div class='d-flex align-items-center task-defaults ${UI.checked(task)}'>
         
-        <div class="d-flex justify-content-between w-100"  > 
+        <div class="d-flex justify-content-between w-100" > 
         
           <div class="expand d-flex flex-row flex-grow-1">
           
-            <div class="">
+            <div class="d-flex align-items-center">
               <i class="fas fa-landmark me-3"></i><span>${task.name}</span>
             </div>
             
             
           </div>
-          <div>
+          <div class="d-flex align-items-center">
             <span class="m-3">priority: ${task.priority}</span>
             <i class="fas fa-edit edit-task ms-3"></i>
             <i class="far fa-trash-alt ms-3 delete-task"></i>
