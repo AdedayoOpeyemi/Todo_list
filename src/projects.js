@@ -4,14 +4,6 @@ export default class Project {
     this.tasks = [];
   }
 
-  // set projectname(name) {
-  //   this.name = name;
-  // }
-
-  // get name() {
-  //   return this.name;
-  // }
-
   getName() {
     return this.name;
   }

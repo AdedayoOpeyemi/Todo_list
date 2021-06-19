@@ -67,5 +67,30 @@ export default class Storage {
     Storage.saveTodoList(todoList);
   }
 
+  static allTaskToday() {
+    const todoList = Storage.getTodoList();
+     return todoList.todayTasks(); 
+  }
+
+  static allTaskThisWeek() {
+    const todoList = Storage.getTodoList();
+     return todoList.currentWeekTasks(); 
+  }
+
+  static allTask() {
+    const todoList = Storage.getTodoList();
+     return todoList.allTasks(); 
+  }
+
+  static allTaskThisMonth() {
+    const todoList = Storage.getTodoList();
+     return todoList.currentMonthTasks();
+  }
+
+  static getProject(project) {
+    const todoList = Storage.getTodoList();
+    return todoList.getProject(project);
+  }
+
 }
 

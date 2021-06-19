@@ -19,11 +19,10 @@ export default class Task {
     this.description = description;
   }
 
-  updateTask(name, description, duedate, priority, completed) {
+  updateTask(name, description, duedate, priority) {
     this.description = description;
     this.dueDate = duedate;
     this.priority = priority;
-    this.completed = completed;
     this.name = name;
   }
 

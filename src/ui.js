@@ -32,17 +32,11 @@ export default class UI {
   }
   
   static loadProjects() {
-    
     Storage.getTodoList()
       .getProjects()
       .forEach((project) => {
-        if (
-          project.name !== 'Inbox' &&
-          project.name !== 'Today' &&
-          project.name !== 'This week'
-        ) {
+       
           UI.createProject(project.name);
-        }
       });
     UI.projectTasks();
     UI.deleteProject();
@@ -53,6 +47,7 @@ export default class UI {
     document.querySelectorAll('.named-project-list').forEach(project => {
       project.addEventListener('click', (e) => {
         UI.loadTask(e.target.innerText);
+  
       })
     });
   }
@@ -94,17 +89,12 @@ export default class UI {
 
   static loadTask(projectName) {
     UI.clearTaskList();
-    console.log(typeof projectName)
+    document.querySelector('#add-task').style.display = "block";
     const projectTitle = document.querySelector('.active-project-title');
     const todoList = Storage.getTodoList();
-    // console.log(Storage.getTodoList() instanceof TodoList);
-    console.log(todoList.getProjects());
     const allProjects = todoList.getProjects();
     const activeProject = todoList.getProject(projectName);
-    // console.log(activeProject[n])
-    // const activeProjectTitle = document.querySelector('.active-project-tasks');
-    projectTitle.innerHTML =`<h5>${projectName}</h5>`
-     console.log(todoList.getProject(projectName));
+    projectTitle.innerHTML =`<h5>${projectName}</h5>`;
     Storage.getTodoList()
     .getProject(projectName)
     .getTasks().forEach((task) => {
@@ -189,8 +179,6 @@ export default class UI {
     for (var i=0; i < editTaskIcon.length; i++) {
       editTaskIcon[i].addEventListener("click", function() {
         var taskToEdit = this.parentElement.previousElementSibling.children[0].children[1].innerText;
-        console.log(taskToEdit)
-
         var taskEditForm = new Modal(document.getElementById('exampleModal'), {
           keyboard: false
         })
@@ -216,15 +204,9 @@ export default class UI {
     for (var i=0; i < deleteTaskIcon.length; i++) {
       deleteTaskIcon[i].addEventListener("click", function() {
         var taskToDelete = this.parentElement.previousElementSibling.children[0].children[1].innerText;
-        console.log(taskToDelete)
-
         const projectOfTask = document.querySelector('.active-project-title h5').innerText
-        console.log(projectOfTask)
         Storage.deleteTask(projectOfTask, taskToDelete);
         this.closest(".task-body").remove()
-        // Storage.deleteProject(projectToDelete);
-        // UI.clearProjectList();
-        // UI.loadProjects();
       })
     }
   }
@@ -236,17 +218,9 @@ export default class UI {
     for (var i=0; i < taskCheckbox.length; i++) {
       taskCheckbox[i].addEventListener("change", function() {
         var taskToEditCompletion = this.parentElement.previousElementSibling.children[0].children[1].innerText;
-        console.log(taskToEditCompletion)
-        console.log(this.checked);
-
         const projectOfTask = document.querySelector('.active-project-title h5').innerText
         Storage.changeTaskCompletion(projectOfTask, taskToEditCompletion, this.checked)
         UI.loadTask(projectOfTask)
-
-
-        // Storage.deleteProject(projectToDelete);
-        // UI.clearProjectList();
-        // UI.loadProjects();
       })
     }
   }  
@@ -254,9 +228,91 @@ export default class UI {
 
   }
 
-  static removeProject(project) {
+  static createSpecialTask(task) {
+    return `
+    <div class='d-flex flex-column task-body mb-3'>
+      <div class='d-flex align-items-center task-defaults ${UI.checked(task)}'>
+        
+        <div class="d-flex justify-content-between w-100" > 
+        
+          <div class="expand d-flex flex-row flex-grow-1">
+          
+            <div class="d-flex align-items-center">
+              <i class="fas fa-landmark me-3"></i><span>${task.name}</span>
+            </div>
+            
+            
+          </div>
+          <div class="d-flex align-items-center">
+            <span class="m-3">priority: ${task.priority}</span>
+            <i class="fas fa-edit edit-task ms-3"></i>
+            <i class="far fa-trash-alt ms-3 delete-task"></i>
+            <span class="ms-3">${task.dueDate}</span>
+            <input class="ms-5 completed" type="checkbox" id="completed" name="completed" value="completed" ${task.completedTask()} disabled>
+          </div>
+      
+        </div>
+      </div>
+      <div class="content">
+        <div class="card card-body">
+          ${task.description}
+        </div>
+      </div>
+    </div>
+  `
+
+
+
 
   }
+
+  static addSpecialTask(task) {
+    const taskList = document.querySelector('.active-project-tasks');
+    taskList.innerHTML += UI.createSpecialTask(task)
+  }
+
+  static loadTodayTasks() {
+    document.querySelector('#add-task').style.display = "none";
+    UI.clearTaskList();
+    document.querySelector('.active-project-title').innerHTML = `<h5>Today's tasks</h5>`
+    Storage.allTaskToday().forEach((task) => {
+      {
+        UI.addSpecialTask(task);
+      }
+    });
+    
+    UI.collapsible();
+
+  }
+
+  static loadThisWeekTasks() {
+    document.querySelector('#add-task').style.display = "none";
+    UI.clearTaskList();
+    document.querySelector('.active-project-title').innerHTML = `<h5>This Week tasks</h5>`
+    Storage.allTaskThisWeek().forEach((task) => {
+      {
+        UI.addSpecialTask(task);
+      }
+    });
+    
+    UI.collapsible();
+
+  }
+
+  static loadThisMonthTasks() {
+    document.querySelector('#add-task').style.display = "none";
+    UI.clearTaskList();
+    document.querySelector('.active-project-title').innerHTML = `<h5>This Month tasks</h5>`
+    Storage.allTaskThisMonth().forEach((task) => {
+      {
+        UI.addSpecialTask(task);
+      }
+    });
+    
+    UI.collapsible();
+
+  }
+
 
 
   static addTask(task) {
@@ -271,13 +327,14 @@ export default class UI {
     for (var i=0; i < deleteIcon.length; i++) {
       deleteIcon[i].addEventListener("click", function() {
         var projectToDelete = this.parentElement.previousElementSibling.children[1].innerText;
-        const projectTasks = document.querySelector('.active-project-title');
-        console.log(projectToDelete)
+        const projectTasks = document.querySelector('.active-project-title h5').innerText;
+        
         Storage.deleteProject(projectToDelete);
         if (projectTasks == projectToDelete) {
           UI.clearTaskList();
         }
-        UI.clearTaskList();
+        document.querySelector('#add-task').style.display = "none";  
+        document.querySelector('.active-project-title').innerHTML = `<h5>Select a Project to view the tasks in it</h5>`
         UI.clearProjectList();
         UI.loadProjects();
       })
@@ -288,6 +345,25 @@ export default class UI {
 
   }
 
+  static errorMessageProject(xyz) {
+    const error = document.getElementById("projectError")
+    if (Storage.getProject(xyz) != -1 ) 
+    {
+        // Changing content and color of content
+        error.textContent = "A Project with that name already exists"
+        error.style.color = "red"
+        return
+    } 
+  }
+
+  static errorMessageTask(project, taskName) {
+    const error = document.getElementById("taskError");
+    if (Storage.getTask(project, taskName) != undefined) {
+      error.textContent = "A task within this project already has that name "
+        error.style.color = "red"
+        return
+    }
+  }
 
 }
 

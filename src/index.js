@@ -1,5 +1,6 @@
 // import { Tooltip, Toast, Popover } from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Modal } from 'bootstrap';
 import 'bootstrap';
 import "./styles.css";
 import TodoList from './todolist';
@@ -9,6 +10,7 @@ import UI from './ui';
 import Task from './task';
 import isToday from 'date-fns/isToday';
 import parseISO from 'date-fns/parseISO';
+// import { Modal } from 'bootstrap';
 // import loadHeader from './generalTemplate';
 
 
@@ -16,30 +18,54 @@ const Content = document.querySelector('#content');
 
 document.querySelector('#add-task').addEventListener('click', UI.setMinDate());
 
-document.addEventListener('onload', UI.loadProjects());
+const loadAll = () => {
+  UI.loadProjects();
+  UI.loadTodayTasks();
+}
 
+const modalEl = document.getElementById('exampleModal');
+
+ const closeModal = () => {
+  const modal = Modal.getInstance(modalEl);
+  modal.hide();
+  modalEl.addEventListener('hidden.bs.modal', () => {
+    modal.dispose();
+  }, {once:true});
+};
+
+
+window.addEventListener('DOMContentLoaded', loadAll)
+
+document.querySelector('#title').addEventListener('keyup', (e) => {
+  const error = document.getElementById("taskError")
+  error.textContent = ""    
+});
+
+document.querySelector('#new_project').addEventListener('keyup', (e) => {
+  const error = document.getElementById("projectError")
+  error.textContent = ""    
+});
 document.querySelector("#project-form").addEventListener('submit', (e) => {
 
 e.preventDefault();
-const xyz = document.querySelector('#new_project').value;
+const proName = document.querySelector('#new_project').value;
+const xyz = proName.toUpperCase();
+const error = document.getElementById("projectError");
+
+if (Storage.getProject(xyz) != undefined ) {
+  // Changing content and color of content
+  error.textContent = "A Project with that name already exists"
+  error.style.color = "red"
+  return
+}
+
 const abc = new Project(xyz);
 const todo = Storage.getTodoList();
-// Object.assign(todo, new TodoList);
-// todo.projects.map
-// Object.assign(todo.projects, abc);
-
-// if (Storage.getTodoList().contains(abc)) {
-//   addProjectPopupInput.value = '';
-//   alert('Project names must be different');
-//   return;
-// }
 todo.addProject(abc);
-Storage.saveTodoList(todo);
-
-// UI.loadProjects();
-// UI.createProject(abc.name);
+Storage.saveTodoList(todo)
 UI.clearProjectList();
 UI.loadProjects();
+UI.loadTask(xyz);
 // UI.clearProjectForm();
 
 });
@@ -54,7 +80,10 @@ document.querySelector("#task-form").addEventListener('submit', (e) => {
 
   e.preventDefault();
   const previousTitle = document.querySelector('#title').placeholder;
-  console.log(previousTitle);
+
+  // var taskForm = new Modal(document.getElementById('exampleModal'), {
+  //   keyboard: false
+  // })
   //get the current project
   const currentProject = document.querySelector(".active-project-title h5").innerText;
 
@@ -63,126 +92,38 @@ document.querySelector("#task-form").addEventListener('submit', (e) => {
   const description = document.querySelector('#task-description').value;
   const duedate = document.querySelector('#duedate').value;
   const priority = document.querySelector('#task-priority').value;
-  console.log(priority)
+  
 
   if (previousTitle == "Add new task") {
     const newTask= new Task(title, description, duedate, priority);
-  Storage.addTask(currentProject, newTask)
-  console.log
-  UI.loadTask(currentProject);
-  console.log(isToday(parseISO(duedate)));
+    const error = document.getElementById("taskError");
+    if (Storage.getTask(currentProject, title) != undefined) {
+      error.textContent = "A task within this project already has that name "
+        error.style.color = "red"
+        return
+    }
+
+    Storage.addTask(currentProject, newTask);
+    UI.loadTask(currentProject);
+    closeModal();
+    return
   }
-
-  Storage.updateTask(currentProject, previousTitle, title, description, duedate, priority);
+  if (previousTitle  != title) {
+    if (Storage.getTask(currentProject, title) != undefined) {
+      error.textContent = "A task within this project already has that name "
+        error.style.color = "red"
+        return
+    }
+  }
+ 
+  Storage.updateTask(currentProject, previousTitle, title, description, duedate, priority)
+  closeModal();
+  document.querySelector('#title').placeholder = "Add new task";
   UI.loadTask(currentProject);
-  // console.log(currentProject)
-  //Create instance of book
-  
-;
-// const todoList = Storage.getTodoList().getProject(currentProject);
-//  console.log(todoList);
-  // console.log(newBook)
-
-  //Add new instance of Book to List
-  // UI.addBookToList(newBook);alright,
 });
 
-// document.querySelectorAll(e)
-
-// function Person(first, last, age, eye) {
-//   this.firstName = first;
-//   this.lastName = last;
-//   this.age = age;
-//   this.eyeColor = eye;
-// }
-
-// const submission = document.querySelector("#add-task-button");
-
-// submission.addEventListener("submit", function( {
-//   taskTitle = document.getElementById("title")
-  
-// })
-
-// document.querySelector('#todo-form').addEventListener('submit', saveTask);
-
-// function saveTask(e){
-//   e.preventDefault();
-//   //get form values
-//   var taskName = document.getElementById('taskName').value;
-//   var dueDate = document.getElementById('dueDate').value;
-//   var taskDescription = document.getElementById('description').value;
-  
-  
-//   //create an object to store the variables
-//   var tasks = {
-//     name:taskName,
-//     description:taskDescription,
-//     dueBy: dueDate
-//   }
-
-//   console.log(tasks)
-  
-
-//   if(localStorage.getItem('task')==null){
-//     var task =[]; task.push(tasks);
-//     localStorage.setItem('task',JSON.stringify(task));
-//     }else{
-//     var myTask = localStorage.getItem('task'); myTask.push(tasks);
-//     // then reset the localStorage
-//     localStorage.setItem('task',JSON.stringify(myTask));
-// }
-// }
-
-// document.querySelector("#todo-form").addEventListener('submit', (e) => {
-
-//   e.preventDefault();
-
-//   //Get  values from form
-//   var taskName = document.getElementById('taskName').value;
-//   var dueDate = document.getElementById('dueDate').value;
-//   var taskDescription = document.getElementById('description').value;
-  
-  
-//   //create an object to store the variables
-//   var tasks = {
-//     name:taskName,
-//     description:taskDescription,
-//     dueBy: dueDate
-//   }
-
-//   console.log(tasks)
-  
-
-//   if(localStorage.getItem('task')==null){
-//     var task =[]; 
-//     task.push(tasks);
-//     localStorage.setItem('task',JSON.stringify(task));
-//     } else {
-//     var myTask =  JSON.parse(localStorage.getItem('task')); 
-//     myTask.push(tasks);
-
-//     // myTask.each((taskObj) => )
-//     // then reset the localStorage
-//     localStorage.setItem('task',JSON.stringify(myTask));
-// };
-// });
+document.querySelector('#this-day').addEventListener('click', UI.loadTodayTasks);
+document.querySelector('#this-week').addEventListener('click', UI.loadThisWeekTasks);
+document.querySelector('#this-month').addEventListener('click', UI.loadThisMonthTasks);
 
 
-// const cleanDOM = () => {
-//   appContent.innerHTML = '';
-// };
-
-// const loadHeader = () => {
- 
-// const testDiv = document.createElement('DIV');
-// testDiv.classList.add('p-3', 'mb-2', 'text-white', 'bg-primary');
-// testDiv.innerText = 'This is a test practice';
-// appContent.append(testDiv);
-// };
-
-// document.addEventListener('click', () => {
-//   cleanDOM();
-//   loadHeader();
-// });
-
-document.getElementsByClassName('delete-project') 
