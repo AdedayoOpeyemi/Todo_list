@@ -49,9 +49,10 @@ button {
   text-decoration: none;
 }
 
-button:hover {
+button:hover, .timed-project:hover {
   background-color: #679289;
   color: white;
+  cursor: pointer;
 }
 
 .named-projects h5 {
