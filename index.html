@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang='en'>
     <head>
+      <meta charset="utf-8">
         <title>ToDo List</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <meta charset="utf-8">
+        
     </head>
     <body>
       <header>
@@ -24,7 +26,7 @@
           <div class="project-section col-3">
             <div class="timely-projects my-5">
               <div class="">
-                <button class="d-flex w-100 timed-project" id="this-day">
+                <button type="button" class="d-flex w-100 timed-project" id="this-day">
                   <div>
                     <i class="fas fa-calendar-day me-3"></i>
                   </div>
@@ -34,7 +36,7 @@
                 </button>
               </div>
               <div>
-                <button class="d-flex w-100 timed-project" id="this-week">
+                <button class="d-flex w-100 timed-project" id="this-week" type="button">
                   <div>
                     <i class="fas fa-calendar-week me-3"></i>
                   </div>
@@ -65,7 +67,7 @@
               </div>
 
               <form id="project-form">
-                <label for="fname">Add New Project</label><br>
+                <label for="new_name">Add New Project</label><br>
                 <input type="text" id="new_project" name="new_project" placeholder="New Project" required><br>
                 <span id="projectError"></span>
                 <input type="submit" value="Add Project">
@@ -96,20 +98,21 @@
                     </div><br>
                     <div class="form-group">
                       <label for="description">Description</label>
-                      <textarea type="text" id="task-description" class="form-control" rows="8" cols="100" required=""></textarea>
+                      <textarea id="task-description" class="form-control" rows="8" cols="100" required=""></textarea>
                     </div><br>
                  
                     <div class="form-group">
                       <label for="priority">Priority</label>
                       <select id="task-priority" class="form-control" required="">
+                        <option value="" disabled selected hidden>Choose a priority level</option>
                         <option value="low">Low</option>
                         <option value="normal">Normal</option>
                         <option value="high">High</option>
-                        <select>
+                      </select>
                     </div><br>
                     <div class="form-group">
                       <label for="duedate">Due date</label>
-                      <input type="date" id="duedate" class="form-control" min="today" required="">
+                      <input type="date" id="duedate" class="form-control" required="">
                     </div><br>
 
       
