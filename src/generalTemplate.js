@@ -14,7 +14,6 @@
 //   brandLogo.setAttribute('id', 'logo');
 //   brandLogo.innerText = 'TickyTick';
 
-
 //   workingHeader.append(brandLogo);
 //   header.append(workingHeader)
 

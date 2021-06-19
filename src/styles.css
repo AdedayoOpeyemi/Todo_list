@@ -3,13 +3,12 @@
   src: url('./PermanentMarker-Regular.ttf') format('ttf');
 }
 
-
 body {
-  background-color: #FDFDFF;
+  background-color: #fdfdff;
 }
 
 header {
-  background-color: #393D3F;
+  background-color: #393d3f;
   height: 5em;
 }
 
@@ -20,7 +19,7 @@ header {
 
 .mainbody {
   min-height: 100vh;
-  background-color:#fdfdff;
+  background-color: #fdfdff;
 }
 
 .page-content {
@@ -31,20 +30,17 @@ header {
   background-color: #c6c5b9;
 }
 
-.project-button, .timed-project {
-    /* background-color: #4CAF50; Green */
-    border: none;
-    /* color: #ACBEA3; */
-    background-color: inherit;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    /* width: 100%; */
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1em;
-    font-weight: 600;
+.project-button,
+.timed-project {
+  border: none;
+  background-color: inherit;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1em;
+  font-weight: 600;
 }
 
 button {
@@ -60,15 +56,15 @@ button:hover {
 
 .named-projects h5 {
   font-family: 'Montserrat', sans-serif;
-    font-size: 2em;
-    font-weight: 800;
-    background-color: #393d3f;
-    color: white;
-    border-radius: 10px;
+  font-size: 2em;
+  font-weight: 800;
+  background-color: #393d3f;
+  color: white;
+  border-radius: 10px;
 }
 
 input:focus::-webkit-input-placeholder {
-  transition: opacity 0.5s 0.5s ease!important;
+  transition: opacity 0.5s 0.5s ease !important;
   opacity: 0.35;
 }
 
@@ -78,7 +74,7 @@ input:focus::-webkit-input-placeholder {
 
 input[type='checkbox'] {
   width: 25px;
-  height: 25px
+  height: 25px;
 }
 
 input[type='checkbox']:checked {
@@ -98,15 +94,6 @@ input[type='checkbox']:checked {
 .collapsible {
   background-color: #555;
   color: white;
-  /* background-color: #BCBABE; */
-  color: white;
-  /* cursor: context-menu;
-  padding: 12px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px; */
 }
 
 .checked {
@@ -119,25 +106,26 @@ input[type='checkbox']:checked {
   background-color: yellow;
 }
 
-.active, .collapsible:hover {
+.active,
+.collapsible:hover {
   background-color: #679289;
 }
 
-.far:hover, .fas:hover, .completed {
+.far:hover,
+.fas:hover,
+.completed {
   color: white;
   cursor: pointer;
 }
 
 .content {
-  /* padding: 0 18px; */
   display: none;
   overflow: hidden;
   background-color: #f1f1f1;
 }
 
 .active-project {
-  background-color: #BFC3C5
-
+  background-color: #bfc3c5;
 }
 
 .completed-task {

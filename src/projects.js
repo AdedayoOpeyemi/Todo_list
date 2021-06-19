@@ -9,11 +9,11 @@ export default class Project {
   }
 
   addTask(taskObj) {
-    this.tasks.push(taskObj)
+    this.tasks.push(taskObj);
   }
 
   deleteTask(taskObj) {
-    const indexOfTask = this.tasks.findIndex((task) => task.name == taskObj.name);
+    const indexOfTask = this.tasks.findIndex((task) => task.name === taskObj.name);
     this.tasks.splice(indexOfTask, 1);
   }
 
@@ -28,5 +28,4 @@ export default class Project {
   getTask(taskName) {
     return this.tasks.find((task) => task.getName() === taskName);
   }
-
 }

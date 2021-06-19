@@ -1,70 +1,57 @@
-import Project from './projects';
-import Storage from './storage';
-import Task from './task';
-import TodoList from './todolist';
 import { Modal } from 'bootstrap';
-// import 'bootstrap';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import Storage from './storage';
 
 export default class UI {
-
   static clearTaskForm() {
     document.querySelector('#title').value = '';
     document.querySelector('#task-description').value = '';
     document.querySelector('#duedate').value = '';
   }
 
-
   static clearProjectForm() {
     document.querySelector('#new_project').value = '';
- }
+  }
+
   static clearProjectList() {
-    document.querySelector(".named-project").innerHTML = "";
+    document.querySelector('.named-project').innerHTML = '';
   }
 
   static clearTaskList() {
-    document.querySelector(".active-project-title").innerHTML = "";
-    document.querySelector(".active-project-tasks").innerHTML = "";
+    document.querySelector('.active-project-title').innerHTML = '';
+    document.querySelector('.active-project-tasks').innerHTML = '';
   }
 
-  static loadHomepage() {
-
-  }
-  
   static loadProjects() {
     Storage.getTodoList()
       .getProjects()
       .forEach((project) => {
-       
-          UI.createProject(project.name);
+        UI.createProject(project.name);
       });
     UI.projectTasks();
     UI.deleteProject();
-    // UI.initAddProjectButtons();
   }
 
   static projectTasks() {
-    document.querySelectorAll('.named-project-list').forEach(project => {
+    document.querySelectorAll('.named-project-list').forEach((project) => {
       project.addEventListener('click', (e) => {
         UI.loadTask(e.target.innerText);
-  
-      })
+      });
     });
   }
 
   static setMinDate() {
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
-    var yyyy = today.getFullYear();
-    if(dd<10){
-      dd='0'+dd
-    } 
-    if(mm<10){
-      mm='0'+mm
-    } 
-    today = yyyy+'-'+mm+'-'+dd;
-    document.getElementById("duedate").setAttribute("min", today);
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth() + 1; // January is 0 so need to add 1 to make it 1!
+    const yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = `0${dd}`;
+    }
+    if (mm < 10) {
+      mm = `0${mm}`;
+    }
+    today = `${yyyy}-${mm}-${dd}`;
+    document.getElementById('duedate').setAttribute('min', today);
   }
 
   static createProject(name) {
@@ -83,41 +70,33 @@ export default class UI {
         </button>
         
       </div>
-    `
+    `;
     UI.clearProjectForm();
   }
 
   static loadTask(projectName) {
     UI.clearTaskList();
-    document.querySelector('#add-task').style.display = "block";
+    document.querySelector('#add-task').style.display = 'block';
     const projectTitle = document.querySelector('.active-project-title');
-    const todoList = Storage.getTodoList();
-    const allProjects = todoList.getProjects();
-    const activeProject = todoList.getProject(projectName);
-    projectTitle.innerHTML =`<h5>${projectName}</h5>`;
+    projectTitle.innerHTML = `<h5>${projectName}</h5>`;
     Storage.getTodoList()
-    .getProject(projectName)
-    .getTasks().forEach((task) => {
-      {
+      .getProject(projectName)
+      .getTasks().forEach((task) => {
         UI.addTask(task);
-      }
-    });
+      });
     UI.collapsible();
     UI.clearTaskForm();
     UI.deleteTask();
     UI.editTask();
     UI.completeTask();
-  
   }
 
   static checked(value) {
-    if (value.completed == true) {
-      return "checked";
+    if (value.completed === true) {
+      return 'checked';
     }
-    return "collapsible"
+    return 'collapsible';
   }
-
-
 
   static createTask(task) {
     return `
@@ -150,80 +129,74 @@ export default class UI {
         </div>
       </div>
     </div>
-  `
-
-
-
-
+  `;
   }
 
   static collapsible() {
-    const coll = document.getElementsByClassName("expand");
+    const coll = document.getElementsByClassName('expand');
 
-    for (var i = 0; i < coll.length; i++) {
-      coll[i].addEventListener("click", function() {
-        this.parentElement.parentElement.classList.toggle("active");
-        var content = this.parentElement.parentElement.nextElementSibling;
-        if (content.style.display === "block") {
-          content.style.display = "none";
+    for (let i = 0; i < coll.length; i += 1) {
+      coll[i].addEventListener('click', function () {
+        this.parentElement.parentElement.classList.toggle('active');
+        const content = this.parentElement.parentElement.nextElementSibling;
+        if (content.style.display === 'block') {
+          content.style.display = 'none';
         } else {
-          content.style.display = "block";
+          content.style.display = 'block';
         }
       });
     }
   }
 
-  static editTask() { 
-    const editTaskIcon =  document.querySelectorAll('.edit-task')
+  static editTask() {
+    const editTaskIcon = document.querySelectorAll('.edit-task');
 
-    for (var i=0; i < editTaskIcon.length; i++) {
-      editTaskIcon[i].addEventListener("click", function() {
-        var taskToEdit = this.parentElement.previousElementSibling.children[0].children[1].innerText;
-        var taskEditForm = new Modal(document.getElementById('exampleModal'), {
-          keyboard: false
-        })
-        const projectOfTask = document.querySelector('.active-project-title h5').innerText
-      const task = Storage.getTask(projectOfTask, taskToEdit)
-      
-      document.querySelector('#title').placeholder = task.name;
-      document.querySelector('#title').value = task.name;
-      document.querySelector('#task-description').value = task.description;
-      document.querySelector('#duedate').value = task.dueDate;
-      document.querySelector('#task-priority').value = task.priority;
-       
+    for (let i = 0; i < editTaskIcon.length; i += 1) {
+      editTaskIcon[i].addEventListener('click', function () {
+        const taskTE = this.parentElement.previousElementSibling.children[0].children[1].innerText;
+        const taskEditForm = new Modal(document.getElementById('exampleModal'), {
+          keyboard: false,
+        });
+        const projectOfTask = document.querySelector('.active-project-title h5').innerText;
+        const task = Storage.getTask(projectOfTask, taskTE);
+
+        document.querySelector('#title').placeholder = task.name;
+        document.querySelector('#title').value = task.name;
+        document.querySelector('#task-description').value = task.description;
+        document.querySelector('#duedate').value = task.dueDate;
+        document.querySelector('#task-priority').value = task.priority;
+
         taskEditForm.show();
-        
-      })
+      });
     }
   }
 
+  static deleteTask() {
+    const deleteTaskIcon = document.querySelectorAll('.delete-task');
 
-  static deleteTask() { 
-    const deleteTaskIcon =  document.querySelectorAll('.delete-task')
-
-    for (var i=0; i < deleteTaskIcon.length; i++) {
-      deleteTaskIcon[i].addEventListener("click", function() {
-        var taskToDelete = this.parentElement.previousElementSibling.children[0].children[1].innerText;
-        const projectOfTask = document.querySelector('.active-project-title h5').innerText
-        Storage.deleteTask(projectOfTask, taskToDelete);
-        this.closest(".task-body").remove()
-      })
+    for (let i = 0; i < deleteTaskIcon.length; i += 1) {
+      deleteTaskIcon[i].addEventListener('click', function () {
+        const taskTD = this.parentElement.previousElementSibling.children[0].children[1].innerText;
+        const projectOfTask = document.querySelector('.active-project-title h5').innerText;
+        Storage.deleteTask(projectOfTask, taskTD);
+        this.closest('.task-body').remove();
+      });
     }
   }
-
 
   static completeTask() {
-    const taskCheckbox =  document.querySelectorAll('.completed')
+    const taskCheckbox = document.querySelectorAll('.completed');
 
-    for (var i=0; i < taskCheckbox.length; i++) {
-      taskCheckbox[i].addEventListener("change", function() {
-        var taskToEditCompletion = this.parentElement.previousElementSibling.children[0].children[1].innerText;
-        const projectOfTask = document.querySelector('.active-project-title h5').innerText
-        Storage.changeTaskCompletion(projectOfTask, taskToEditCompletion, this.checked)
-        UI.loadTask(projectOfTask)
-      })
+    for (let i = 0; i < taskCheckbox.length; i += 1) {
+      taskCheckbox[i].addEventListener('change', function () {
+        const taskTC = this.parentElement.previousElementSibling.children[0].children[1].innerText;
+        const projectOfTask = document.querySelector('.active-project-title h5').innerText;
+        Storage.changeTaskCompletion(projectOfTask, taskTC, this.checked);
+        UI.loadTask(projectOfTask);
+      });
     }
-  }  
+  }
+
   static loadTimelyList() {
 
   }
@@ -259,113 +232,86 @@ export default class UI {
         </div>
       </div>
     </div>
-  `
-
-
-
-
+  `;
   }
 
   static addSpecialTask(task) {
     const taskList = document.querySelector('.active-project-tasks');
-    taskList.innerHTML += UI.createSpecialTask(task)
+    taskList.innerHTML += UI.createSpecialTask(task);
   }
 
   static loadTodayTasks() {
-    document.querySelector('#add-task').style.display = "none";
+    document.querySelector('#add-task').style.display = 'none';
     UI.clearTaskList();
-    document.querySelector('.active-project-title').innerHTML = `<h5>Today's tasks</h5>`
+    document.querySelector('.active-project-title').innerHTML = '<h5>Today\'s tasks</h5>';
     Storage.allTaskToday().forEach((task) => {
-      {
-        UI.addSpecialTask(task);
-      }
+      UI.addSpecialTask(task);
     });
-    
-    UI.collapsible();
 
+    UI.collapsible();
   }
 
   static loadThisWeekTasks() {
-    document.querySelector('#add-task').style.display = "none";
+    document.querySelector('#add-task').style.display = 'none';
     UI.clearTaskList();
-    document.querySelector('.active-project-title').innerHTML = `<h5>This Week tasks</h5>`
+    document.querySelector('.active-project-title').innerHTML = '<h5>This Week tasks</h5>';
     Storage.allTaskThisWeek().forEach((task) => {
-      {
-        UI.addSpecialTask(task);
-      }
+      UI.addSpecialTask(task);
     });
-    
-    UI.collapsible();
 
+    UI.collapsible();
   }
 
   static loadThisMonthTasks() {
-    document.querySelector('#add-task').style.display = "none";
+    document.querySelector('#add-task').style.display = 'none';
     UI.clearTaskList();
-    document.querySelector('.active-project-title').innerHTML = `<h5>This Month tasks</h5>`
+    document.querySelector('.active-project-title').innerHTML = '<h5>This Month tasks</h5>';
     Storage.allTaskThisMonth().forEach((task) => {
-      {
-        UI.addSpecialTask(task);
-      }
+      UI.addSpecialTask(task);
     });
-    
+
     UI.collapsible();
-
   }
-
-
 
   static addTask(task) {
     const taskList = document.querySelector('.active-project-tasks');
-    taskList.innerHTML += UI.createTask(task)
+    taskList.innerHTML += UI.createTask(task);
   }
 
   static deleteProject() {
-    const deleteIcon = document.getElementsByClassName('delete-project')
-    
+    const deleteIcon = document.getElementsByClassName('delete-project');
 
-    for (var i=0; i < deleteIcon.length; i++) {
-      deleteIcon[i].addEventListener("click", function() {
-        var projectToDelete = this.parentElement.previousElementSibling.children[1].innerText;
+    for (let i = 0; i < deleteIcon.length; i += 1) {
+      deleteIcon[i].addEventListener('click', function () {
+        const projectToDelete = this.parentElement.previousElementSibling.children[1].innerText;
         const projectTasks = document.querySelector('.active-project-title h5').innerText;
-        
+
         Storage.deleteProject(projectToDelete);
-        if (projectTasks == projectToDelete) {
+        if (projectTasks === projectToDelete) {
           UI.clearTaskList();
         }
-        document.querySelector('#add-task').style.display = "none";  
-        document.querySelector('.active-project-title').innerHTML = `<h5>Select a Project to view the tasks in it</h5>`
+        document.querySelector('#add-task').style.display = 'none';
+        document.querySelector('.active-project-title').innerHTML = '<h5>Select a Project to view the tasks in it</h5>';
         UI.clearProjectList();
         UI.loadProjects();
-      })
+      });
     }
-  }
-  
-  static removeTask() {
-
   }
 
   static errorMessageProject(xyz) {
-    const error = document.getElementById("projectError")
-    if (Storage.getProject(xyz) != -1 ) 
-    {
-        // Changing content and color of content
-        error.textContent = "A Project with that name already exists"
-        error.style.color = "red"
-        return
-    } 
-  }
-
-  static errorMessageTask(project, taskName) {
-    const error = document.getElementById("taskError");
-    if (Storage.getTask(project, taskName) != undefined) {
-      error.textContent = "A task within this project already has that name "
-        error.style.color = "red"
-        return
+    const error = document.getElementById('projectError');
+    if (Storage.getProject(xyz) !== -1) {
+      // Changing content and color of content
+      error.textContent = 'A Project with that name already exists';
+      error.style.color = 'red';
     }
   }
 
+  static errorMessageTask(project, taskName) {
+    const error = document.getElementById('taskError');
+    if (Storage.getTask(project, taskName) !== undefined) {
+      error.textContent = 'A task within this project already has that name ';
+      error.style.color = 'red';
+    }
+  }
 }
-
-
-    

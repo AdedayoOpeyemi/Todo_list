@@ -28,7 +28,7 @@ export default class Task {
 
   completedTask() {
     if (this.completed == true) {
-      return "checked"
+      return 'checked';
     }
   }
 

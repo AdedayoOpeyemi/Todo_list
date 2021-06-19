@@ -23,11 +23,9 @@ export default class Storage {
 
     todoList
       .getProjects()
-      .forEach((project) =>
-        project.setTasks(
-          project.getTasks().map((task) => Object.assign(new Task(), task)),
-        ),
-      );
+      .forEach((project) => project.setTasks(
+        project.getTasks().map((task) => Object.assign(new Task(), task)),
+      ));
 
     return todoList;
   }
@@ -41,13 +39,13 @@ export default class Storage {
   static deleteProject(projectName) {
     const todoList = Storage.getTodoList();
     todoList.deleteProject(projectName);
-    Storage.saveTodoList(todoList)
+    Storage.saveTodoList(todoList);
   }
 
   static deleteTask(project, task) {
     const todoList = Storage.getTodoList();
     todoList.getProject(project).deleteTask(task);
-    Storage.saveTodoList(todoList)
+    Storage.saveTodoList(todoList);
   }
 
   static getTask(project, task) {
@@ -55,42 +53,41 @@ export default class Storage {
     return todoList.getProject(project).getTask(task);
   }
 
-  static updateTask(project, task, newTitle, newDescription, newDueDate,  newPriority) {
+  static updateTask(project, task, newTitle, newDescription, newDueDate, newPriority) {
     const todoList = Storage.getTodoList();
-    todoList.getProject(project).getTask(task).updateTask(newTitle, newDescription, newDueDate, newPriority);
-    Storage.saveTodoList(todoList)
+    todoList.getProject(project)
+      .getTask(task).updateTask(newTitle, newDescription, newDueDate, newPriority);
+    Storage.saveTodoList(todoList);
   }
 
   static changeTaskCompletion(project, task, status) {
     const todoList = Storage.getTodoList();
-    todoList.getProject(project).getTask(task).toggleCompletion(status)
+    todoList.getProject(project).getTask(task).toggleCompletion(status);
     Storage.saveTodoList(todoList);
   }
 
   static allTaskToday() {
     const todoList = Storage.getTodoList();
-     return todoList.todayTasks(); 
+    return todoList.todayTasks();
   }
 
   static allTaskThisWeek() {
     const todoList = Storage.getTodoList();
-     return todoList.currentWeekTasks(); 
+    return todoList.currentWeekTasks();
   }
 
   static allTask() {
     const todoList = Storage.getTodoList();
-     return todoList.allTasks(); 
+    return todoList.allTasks();
   }
 
   static allTaskThisMonth() {
     const todoList = Storage.getTodoList();
-     return todoList.currentMonthTasks();
+    return todoList.currentMonthTasks();
   }
 
   static getProject(project) {
     const todoList = Storage.getTodoList();
     return todoList.getProject(project);
   }
-
 }
-

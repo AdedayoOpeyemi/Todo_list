@@ -1,4 +1,3 @@
-import Project from './projects';
 import isToday from 'date-fns/isToday';
 import isThisWeek from 'date-fns/isThisWeek';
 import isThisMonth from 'date-fns/isThisMonth';
@@ -10,11 +9,9 @@ export default class TodoList {
   }
 
   addProject(newProject) {
-    if (this.projects.indexOf(newProject) < 0) 
-    {  this.projects.push(newProject);
-      return
-    };
-    
+    if (this.projects.indexOf(newProject) < 0) {
+      this.projects.push(newProject);
+    }
   }
 
   deleteProject(projectName) {
@@ -39,11 +36,11 @@ export default class TodoList {
   }
 
   allTasks() {
-    const tasks = []
-    this.getProjects().forEach((project)  => {
-      project.getTasks().forEach(task => tasks.push(task))
-    })
-    return tasks
+    const tasks = [];
+    this.getProjects().forEach((project) => {
+      project.getTasks().forEach((task) => tasks.push(task));
+    });
+    return tasks;
   }
 
   todayTasks() {
@@ -57,5 +54,4 @@ export default class TodoList {
   currentMonthTasks() {
     return this.allTasks().filter((task) => isThisMonth(parseISO(task.dueDate)));
   }
-
 }
