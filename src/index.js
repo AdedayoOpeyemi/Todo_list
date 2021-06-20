@@ -5,13 +5,28 @@ import Storage from './storage';
 import Project from './projects';
 import UI from './ui';
 import Task from './task';
+import TodoList from './todolist';
 
 document.querySelector('#add-task').addEventListener('click', UI.setMinDate());
 
 const loadAll = () => {
+  initialSetup();
   UI.loadProjects();
   UI.loadTodayTasks();
 };
+
+const initialSetup = () => {
+  if (localStorage.getItem('todoList') === null) {
+    const todoList = new TodoList();
+    const general = new Project("GENERAL TASKS");
+    const generalTask = new Task("Welcome to Tikky", 
+    "Thanks for trying out the App, I hope it helps you to achieve your task planning and monitoring goals", 
+    "2021-06-06", "low")
+    general.addTask(generalTask);
+    todoList.addProject(general);
+    Storage.saveTodoList(todoList);
+  }
+}
 
 const modalEl = document.getElementById('exampleModal');
 
