@@ -242,17 +242,6 @@ export default class UI {
     taskList.innerHTML += UI.createSpecialTask(task);
   }
 
-  // static loadGeneralTasks() {
-  //   document.querySelector('#add-task').style.display = 'block';
-  //   UI.clearTaskList();
-  //   document.querySelector('.active-project-title').innerHTML = '<h5>General Tasks</h5>';
-  //   Storage.allTaskToday().forEach((task) => {
-  //     UI.addSpecialTask(task);
-  //   });
-
-  //   UI.collapsible();
-  // }
-
   static loadTodayTasks() {
     document.querySelector('#add-task').style.display = 'none';
     UI.clearTaskList();

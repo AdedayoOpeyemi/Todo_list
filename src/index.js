@@ -13,7 +13,6 @@ const loadAll = () => {
   initialSetup();
   UI.loadTask("GENERAL TASKS");
   UI.loadProjects();
-  // UI.loadTodayTasks();
 };
 
 const initialSetup = () => {
@@ -70,7 +69,6 @@ document.querySelector('#project-form').addEventListener('submit', (e) => {
   UI.clearProjectList();
   UI.loadProjects();
   UI.loadTask(xyz);
-  // UI.clearProjectForm();
 });
 
 document.querySelectorAll('.named-project-list').forEach((project) => {
@@ -83,9 +81,6 @@ document.querySelector('#task-form').addEventListener('submit', (e) => {
   e.preventDefault();
   const previousTitle = document.querySelector('#title').placeholder;
 
-  // var taskForm = new Modal(document.getElementById('exampleModal'), {
-  //   keyboard: false
-  // })
   // get the current project
   const currentProject = document.querySelector('.active-project-title h5').innerText;
 

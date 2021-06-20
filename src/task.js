@@ -32,30 +32,6 @@ export default class Task {
     }
   }
 
-  // set name(newName) {
-  //   this.name = newName;
-  // }
-
-  // get name() {
-  //   return this.name;
-  // }
-
-  // set description (newDescription) {
-  //   this.description = newDescription;
-  // }
-
-  // get description() {
-  //   return this.description;
-  // }
-
-  // set dueDate(newDueDate) {
-  //   this.dueDate = newDueDate;
-  // }
-
-  // get dueDate() {
-  //   return this.dueDate;
-  // }
-
   toggleCompletion(newStatus) {
     this.completed = newStatus;
   }
