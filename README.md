@@ -24,7 +24,6 @@ Live Demo: [TodoList_App](https://rawcdn.githack.com/AdedayoOpeyemi/Todo_list/47
 
 To get a local copy up and running follow these simple example steps:
 
-
 ### Setup
 
 - Clone the repo `git clone https://github.com/adedayoopeyemi/todo_list.git`
