@@ -11,8 +11,9 @@ document.querySelector('#add-task').addEventListener('click', UI.setMinDate());
 
 const loadAll = () => {
   initialSetup();
+  UI.loadTask("GENERAL TASKS");
   UI.loadProjects();
-  UI.loadTodayTasks();
+  // UI.loadTodayTasks();
 };
 
 const initialSetup = () => {
@@ -123,6 +124,9 @@ document.querySelector('#task-form').addEventListener('submit', (e) => {
   UI.loadTask(currentProject);
 });
 
+document.querySelector('#general-tasks').addEventListener('click', () => {
+  UI.loadTask("GENERAL TASKS")
+});
 document.querySelector('#this-day').addEventListener('click', UI.loadTodayTasks);
 document.querySelector('#this-week').addEventListener('click', UI.loadThisWeekTasks);
 document.querySelector('#this-month').addEventListener('click', UI.loadThisMonthTasks);

@@ -25,7 +25,9 @@ export default class UI {
     Storage.getTodoList()
       .getProjects()
       .forEach((project) => {
-        UI.createProject(project.name);
+        if (project.name !== "GENERAL TASKS") {
+          UI.createProject(project.name);
+        }
       });
     UI.projectTasks();
     UI.deleteProject();
@@ -240,16 +242,16 @@ export default class UI {
     taskList.innerHTML += UI.createSpecialTask(task);
   }
 
-  static loadGeneralTasks() {
-    document.querySelector('#add-task').style.display = 'block';
-    UI.clearTaskList();
-    document.querySelector('.active-project-title').innerHTML = '<h5>General Tasks</h5>';
-    Storage.allTaskToday().forEach((task) => {
-      UI.addSpecialTask(task);
-    });
+  // static loadGeneralTasks() {
+  //   document.querySelector('#add-task').style.display = 'block';
+  //   UI.clearTaskList();
+  //   document.querySelector('.active-project-title').innerHTML = '<h5>General Tasks</h5>';
+  //   Storage.allTaskToday().forEach((task) => {
+  //     UI.addSpecialTask(task);
+  //   });
 
-    UI.collapsible();
-  }
+  //   UI.collapsible();
+  // }
 
   static loadTodayTasks() {
     document.querySelector('#add-task').style.display = 'none';
