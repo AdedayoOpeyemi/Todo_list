@@ -98,7 +98,6 @@ document.querySelector('#task-form').addEventListener('submit', (e) => {
       error.style.color = 'red';
       return;
     }
-
     Storage.addTask(currentProject, newTask);
     UI.loadTask(currentProject);
     closeModal();
