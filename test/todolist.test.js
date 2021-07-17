@@ -5,7 +5,6 @@ import Task from '../src/task';
 const testTodo = new TodoList();
 
 beforeEach(() => {
-  testTodo;
   testTodo.projects = [];
 });
 

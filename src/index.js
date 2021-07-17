@@ -9,12 +9,6 @@ import TodoList from './todolist';
 
 document.querySelector('#add-task').addEventListener('click', UI.setMinDate());
 
-const loadAll = () => {
-  initialSetup();
-  UI.loadTask('GENERAL TASKS');
-  UI.loadProjects();
-};
-
 const initialSetup = () => {
   if (localStorage.getItem('todoList') === null) {
     const todoList = new TodoList();
@@ -26,6 +20,12 @@ const initialSetup = () => {
     todoList.addProject(general);
     Storage.saveTodoList(todoList);
   }
+};
+
+const loadAll = () => {
+  initialSetup();
+  UI.loadTask('GENERAL TASKS');
+  UI.loadProjects();
 };
 
 const modalEl = document.getElementById('exampleModal');

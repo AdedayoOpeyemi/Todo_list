@@ -3,10 +3,6 @@ import Task from '../src/task';
 
 const newProject = new Project('Renovation');
 
-beforeEach(() => {
-  newProject;
-});
-
 afterEach(() => {
   newProject.setTasks([]);
 });

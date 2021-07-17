@@ -34,7 +34,7 @@ it('Expect getItem and setItem to have been called once each on getProject', () 
 });
 
 it('Expect getItem and setItem to have been called on allTaskThisMonth', () => {
-  const tasks = Storage.allTaskThisWeek();
+  Storage.allTaskThisWeek();
   expect(localStorage.getItem).toHaveBeenCalledTimes(1);
   expect(localStorage.setItem).toHaveBeenCalledTimes(0);
   expect(Array.isArray(Storage.allTaskThisMonth())).toBe(true);
@@ -42,7 +42,7 @@ it('Expect getItem and setItem to have been called on allTaskThisMonth', () => {
 
 it('Expect getItem and setItem to have been called on allTaskThisMonth', () => {
   expect.assertions(3);
-  const tasks = Storage.allTaskThisMonth();
+  Storage.allTaskThisMonth();
   expect(localStorage.getItem).toHaveBeenCalledTimes(1);
   expect(localStorage.setItem).toHaveBeenCalledTimes(0);
   expect(Array.isArray(Storage.allTaskThisMonth())).toBe(true);

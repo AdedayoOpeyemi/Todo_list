@@ -2,10 +2,6 @@ import Task from '../src/task';
 
 const newtask = new Task('shopping', 'Testing new task', new Date('2012-12-12'), 'high');
 
-beforeEach(() => {
-  newtask;
-});
-
 // Testing for instance of class
 it('It should create a new object when called with new', () => {
   expect(newtask).toBeInstanceOf(Task);
