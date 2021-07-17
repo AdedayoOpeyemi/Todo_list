@@ -35,12 +35,18 @@ it('The task name should not be shopping', () => {
 
 //testing the description method
 it('The task description should not be "Testing new task"', () => {
-  newtask.description = "This is a new description"
+  newtask.setDescription( "This is a new description" )
   expect(newtask.description).not.toBe("Testing new task");
 });
 
+it('The task description should be "No description given"', () => {
+  const testtask = new Task("shopping", undefined, new Date("2012-12-12"), "high")
+  expect(testtask.description).toBe("No description given");
+});
+
+
 it('The task description should be "This is a new description"', () => {
-  newtask.description = "This is a new description"
+  newtask.setDescription( "This is a new description" )
   expect(newtask.description).toBe("This is a new description");
 });
 
@@ -74,3 +80,35 @@ it('The task priority should change to low', () => {
   expect(newtask.priority).toBe("low");
 });
 
+//Testing the updateTask method
+it('The task priority should change to low', () => {
+  const testingDate = new Date("2012-06-10")
+  newtask.updateTask("study", "Study for my exams", new Date("2012-06-10"), "high")
+  expect(newtask).toEqual({
+    name: 'study',
+    description: 'Study for my exams',
+    dueDate: testingDate,
+    priority: 'high',
+    completed: false
+  });
+});
+
+it('The task priority should change to low', () => {
+  newtask.toggleCompletion(true)
+  expect(newtask.completed).toBe(true);
+});
+
+it('The task priority should change to low', () => {
+  newtask.toggleCompletion(false)
+  expect(newtask.completed).toBe(false);
+});
+
+it('The task priority should change to low', () => {
+  newtask.toggleCompletion(false)
+  expect(newtask.completedTask()).toEqual(undefined);
+});
+
+it('The task priority should change to low', () => {
+  newtask.toggleCompletion(true)
+  expect(newtask.completedTask()).toEqual('checked');
+});
