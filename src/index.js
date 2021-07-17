@@ -1,11 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal } from 'bootstrap';
 import './styles.css';
-import Storage from './storage';
-import Project from './projects';
-import UI from './ui';
-import Task from './task';
-import TodoList from './todolist';
+import Storage from './storage.js';
+import Project from './projects.js';
+import UI from './ui.js';
+import Task from './task.js';
+import TodoList from './todolist.js';
 
 document.querySelector('#add-task').addEventListener('click', UI.setMinDate());
 

@@ -1,5 +1,5 @@
 import { Modal } from 'bootstrap';
-import Storage from './storage';
+import Storage from './storage.js';
 
 export default class UI {
   static clearTaskForm() {
