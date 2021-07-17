@@ -25,7 +25,7 @@ export default class UI {
     Storage.getTodoList()
       .getProjects()
       .forEach((project) => {
-        if (project.name !== "GENERAL TASKS") {
+        if (project.name !== 'GENERAL TASKS') {
           UI.createProject(project.name);
         }
       });
