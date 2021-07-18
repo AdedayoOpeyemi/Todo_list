@@ -28,7 +28,8 @@ To get a local copy up and running follow these simple example steps:
 
 - Clone the repo `git clone https://github.com/adedayoopeyemi/todo_list.git`
 - `cd` into the cloned repo `cd TODO_LIST`
-- Have fun
+- To build the project locally run `npm run build-dev`
+- To Launch the Application navigate to `dist/index.html` and open with your browser of choice
 
 ## Authors
 
