@@ -1,6 +1,6 @@
-import Project from '../src/projects';
-import TodoList from '../src/todolist';
-import Task from '../src/task';
+import Project from '../src/modules/projects';
+import TodoList from '../src/modules/todolist';
+import Task from '../src/modules/task';
 
 const testTodo = new TodoList();
 

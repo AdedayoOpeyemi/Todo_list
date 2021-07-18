@@ -1,5 +1,5 @@
-import Project from '../src/projects';
-import Task from '../src/task';
+import Project from '../src/modules/projects';
+import Task from '../src/modules/task';
 
 const newProject = new Project('Renovation');
 

@@ -1,4 +1,4 @@
-import Task from '../src/task';
+import Task from '../src/modules/task';
 
 const newtask = new Task('shopping', 'Testing new task', new Date('2012-12-12'), 'high');
 
