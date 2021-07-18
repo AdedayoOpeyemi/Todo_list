@@ -177,7 +177,7 @@ export default class UI {
     const deleteTaskIcon = document.querySelectorAll('.delete-task');
 
     for (let i = 0; i < deleteTaskIcon.length; i += 1) {
-      deleteTaskIcon[i].addEventListener('click', function  modify() {
+      deleteTaskIcon[i].addEventListener('click', function modify() {
         const taskTD = this.parentElement.previousElementSibling.children[0].children[1].innerText;
         const projectOfTask = document.querySelector('.active-project-title h5').innerText;
         Storage.deleteTask(projectOfTask, taskTD);
