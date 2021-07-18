@@ -1,6 +1,6 @@
-import TodoList from './todolist.js';
-import Task from './task.js';
-import Project from './projects.js';
+import TodoList from './todolist';
+import Task from './task';
+import Project from './projects';
 
 export default class Storage {
   static saveTodoList(todolist) {

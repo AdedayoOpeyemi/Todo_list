@@ -1,5 +1,5 @@
 import { Modal } from 'bootstrap';
-import Storage from './storage.js';
+import Storage from './storage';
 
 export default class UI {
   static clearTaskForm() {
@@ -138,7 +138,7 @@ export default class UI {
     const coll = document.getElementsByClassName('expand');
 
     for (let i = 0; i < coll.length; i += 1) {
-      coll[i].addEventListener('click', function () {
+      coll[i].addEventListener('click', () => {
         this.parentElement.parentElement.classList.toggle('active');
         const content = this.parentElement.parentElement.nextElementSibling;
         if (content.style.display === 'block') {
@@ -154,7 +154,7 @@ export default class UI {
     const editTaskIcon = document.querySelectorAll('.edit-task');
 
     for (let i = 0; i < editTaskIcon.length; i += 1) {
-      editTaskIcon[i].addEventListener('click', function () {
+      editTaskIcon[i].addEventListener('click', function modify1() {
         const taskTE = this.parentElement.previousElementSibling.children[0].children[1].innerText;
         const taskEditForm = new Modal(document.getElementById('exampleModal'), {
           keyboard: false,
@@ -177,7 +177,7 @@ export default class UI {
     const deleteTaskIcon = document.querySelectorAll('.delete-task');
 
     for (let i = 0; i < deleteTaskIcon.length; i += 1) {
-      deleteTaskIcon[i].addEventListener('click', function () {
+      deleteTaskIcon[i].addEventListener('click', function  modify() {
         const taskTD = this.parentElement.previousElementSibling.children[0].children[1].innerText;
         const projectOfTask = document.querySelector('.active-project-title h5').innerText;
         Storage.deleteTask(projectOfTask, taskTD);
@@ -190,7 +190,7 @@ export default class UI {
     const taskCheckbox = document.querySelectorAll('.completed');
 
     for (let i = 0; i < taskCheckbox.length; i += 1) {
-      taskCheckbox[i].addEventListener('change', function () {
+      taskCheckbox[i].addEventListener('change', function modify() {
         const taskTC = this.parentElement.previousElementSibling.children[0].children[1].innerText;
         const projectOfTask = document.querySelector('.active-project-title h5').innerText;
         Storage.changeTaskCompletion(projectOfTask, taskTC, this.checked);
@@ -284,7 +284,7 @@ export default class UI {
     const deleteIcon = document.getElementsByClassName('delete-project');
 
     for (let i = 0; i < deleteIcon.length; i += 1) {
-      deleteIcon[i].addEventListener('click', function () {
+      deleteIcon[i].addEventListener('click', function modify() {
         const projectToDelete = this.parentElement.previousElementSibling.children[1].innerText;
         const projectTasks = document.querySelector('.active-project-title h5').innerText;
 
