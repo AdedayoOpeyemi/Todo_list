@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+      <meta charset="utf-8">
+        <title>ToDo List</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
+    </head>
+    <body>
+      <header>
+        <nav class="navbar">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">TickyTick</a>
+          </div>
+        </nav>
+      </header>
+
+      <div class="mainbody container-xxl min-vh-100">
+        <div class="row min-vh-100">
+
+          <div class="project-section col-3">
+            <div class="timely-projects my-5">
+
+              <div class="">
+                <div class="d-flex w-100 timed-project" id="general-tasks">
+                  <div>
+                    <i class="fas fa-calendar-day me-3"></i>
+                  </div>
+                  <div>
+                      <span>General Tasks</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="">
+                <div class="d-flex w-100 timed-project" id="this-day">
+                  <div>
+                    <i class="fas fa-calendar-day me-3"></i>
+                  </div>
+                  <div>
+                      <span>Today</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="d-flex w-100 timed-project" id="this-week" >
+                  <div>
+                    <i class="fas fa-calendar-week me-3"></i>
+                  </div>
+                  <div>
+                      <span>This Week</span>
+                  </div>
+                </div> 
+              </div>
+              <div>
+                <div  class="d-flex w-100 timed-project" id="this-month">
+                  <div>
+                    <i class="far fa-calendar-alt me-3"></i>
+                  </div>
+                  <div>
+                      <span>This Month</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="named-projects mb-5">
+              <h5 class="p-3">Projects</h5>
+
+              <div class="named-project">
+
+
+              </div>
+
+              <form id="project-form">
+                <label for="new_project">Add New Project</label><br>
+                <input type="text" id="new_project" name="new_project" placeholder="New Project" required><br>
+                <span id="projectError"></span>
+                <input type="submit" value="Add Project">
+              </form> 
+
+            </div>
+
+          </div>
+  
+          <div class="tasks-section col-7 h-100">
+            <button type="button" id="add-task" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Add New Task
+            </button>
+
+            <div class="modal fade" id="exampleModal" tabindex="2" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="task-form">
+                    <div class="form-group">
+                      <label for="title">Title</label>
+                      <input type="text" id="title" class="form-control" placeholder="Add new task" required="">
+                      <span id="taskError"></span>
+                    </div><br>
+                    <div class="form-group">
+                      <label for="task-description">Description</label>
+                      <textarea id="task-description" class="form-control" rows="8" cols="100" required=""></textarea>
+                    </div><br>
+                 
+                    <div class="form-group">
+                      <label for="task-priority">Priority</label>
+                      <select id="task-priority" class="form-control" required="">
+                        <option value="" disabled selected hidden>Choose a priority level</option>
+                        <option value="low">Low</option>
+                        <option value="normal">Normal</option>
+                        <option value="high">High</option>
+                      </select>
+                    </div><br>
+                    <div class="form-group">
+                      <label for="duedate">Due date</label>
+                      <input type="date" id="duedate" class="form-control" required="">
+                    </div><br>
+
+      
+                  
+                    <div class="d-grid gap-2">
+                    <input type="submit" value="Add Task" class="btn btn-dark" data-bs-target="#exampleModal">
+                  </div>
+                  </form><br>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+
+            <div class="active-project-title">
+
+            </div>
+
+            <div class="active-project-tasks">
+
+
+            </div>
+  
+            
+          </div>
+  
+          <div class="task-details-section col-2 h-100">
+
+            
+  
+          </div>
+
+        </div>
+        
+      </div>    
+        <script src="bundle.js"></script>
+        
+    </body>
+</html>
