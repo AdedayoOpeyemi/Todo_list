@@ -27,9 +27,10 @@ export default class Task {
   }
 
   completedTask() {
-    if (this.completed == true) {
+    if (this.completed === true) {
       return 'checked';
     }
+    return undefined;
   }
 
   toggleCompletion(newStatus) {

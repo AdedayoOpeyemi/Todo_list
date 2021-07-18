@@ -1,32 +1,32 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal } from 'bootstrap';
-import './styles.css';
-import Storage from './storage';
-import Project from './projects';
-import UI from './ui';
-import Task from './task';
-import TodoList from './todolist';
+import './assets/styles/styles.css';
+import Storage from './modules/storage';
+import Project from './modules/projects';
+import UI from './modules/ui';
+import Task from './modules/task';
+import TodoList from './modules/todolist';
 
 document.querySelector('#add-task').addEventListener('click', UI.setMinDate());
-
-const loadAll = () => {
-  initialSetup();
-  UI.loadTask("GENERAL TASKS");
-  UI.loadProjects();
-};
 
 const initialSetup = () => {
   if (localStorage.getItem('todoList') === null) {
     const todoList = new TodoList();
-    const general = new Project("GENERAL TASKS");
-    const generalTask = new Task("Welcome to Tikky", 
-    "Thanks for trying out the App, I hope it helps you to achieve your task planning and monitoring goals", 
-    "2021-06-06", "low")
+    const general = new Project('GENERAL TASKS');
+    const generalTask = new Task('Welcome to Tikky',
+      'Thanks for trying out the App, I hope it helps you to achieve your task planning and monitoring goals',
+      '2021-06-06', 'low');
     general.addTask(generalTask);
     todoList.addProject(general);
     Storage.saveTodoList(todoList);
   }
-}
+};
+
+const loadAll = () => {
+  initialSetup();
+  UI.loadTask('GENERAL TASKS');
+  UI.loadProjects();
+};
 
 const modalEl = document.getElementById('exampleModal');
 
@@ -104,7 +104,7 @@ document.querySelector('#task-form').addEventListener('submit', (e) => {
     return;
   }
   if (previousTitle !== title) {
-    const error  = document.getElementById('taskError');
+    const error = document.getElementById('taskError');
     if (Storage.getTask(currentProject, title) !== undefined) {
       error.textContent = 'A task within this project already has that name ';
       error.style.color = 'red';
@@ -119,7 +119,7 @@ document.querySelector('#task-form').addEventListener('submit', (e) => {
 });
 
 document.querySelector('#general-tasks').addEventListener('click', () => {
-  UI.loadTask("GENERAL TASKS")
+  UI.loadTask('GENERAL TASKS');
 });
 document.querySelector('#this-day').addEventListener('click', UI.loadTodayTasks);
 document.querySelector('#this-week').addEventListener('click', UI.loadThisWeekTasks);

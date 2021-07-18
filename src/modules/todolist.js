@@ -15,7 +15,7 @@ export default class TodoList {
   }
 
   deleteProject(projectName) {
-    const indexOfProject = this.projects.findIndex((project) => project.name == projectName);
+    const indexOfProject = this.projects.findIndex((project) => project.name === projectName);
     this.projects.splice(indexOfProject, 1);
   }
 
